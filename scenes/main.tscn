@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://byv0e8l7uygur"]
+
+[ext_resource type="Script" uid="uid://cawi5l7ws1fm5" path="res://scripts/Board.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://bq01n37gr5spf" path="res://scripts/UI.gd" id="2_h2yge"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.48570347, 0.48570353, 0.48570347, 1)
+
+[node name="Board" type="Node" parent="."]
+script = ExtResource("1_0xm2m")
+
+[node name="UI" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_h2yge")
+board_node = NodePath("../Board")
