@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://soeuvp4phwpy"]
 
 [ext_resource type="Script" uid="uid://d16er6a1hfvrq" path="res://main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://cart.png" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="2_7vrkn"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_06t4h")
@@ -49,7 +49,7 @@ theme_override_font_sizes/font_size = 6
 text = "X"
 
 [node name="Cart" type="Sprite2D" parent="."]
-position = Vector2(267, 76)
+position = Vector2(327, 78)
 texture = ExtResource("2_7vrkn")
 
 [connection signal="pressed" from="Btn_manager/Iniciar" to="." method="_on_iniciar_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c43eeukqucn7u"]
 
-[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://cart.png" id="1_b35dw"]
-[ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://esteira_direita.png" id="1_pncst"]
+[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="1_b35dw"]
+[ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://assets/esteira_direita.png" id="1_pncst"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxb2x"]
 atlas = ExtResource("1_pncst")
@@ -30,7 +30,7 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(323, 90.5)
 sprite_frames = SubResource("SpriteFrames_xr4ag")
-frame_progress = 0.03242382
+frame_progress = 0.107438736
 
 [node name="Cart" type="Sprite2D" parent="."]
 position = Vector2(336, 69.5)

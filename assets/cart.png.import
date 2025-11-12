@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dldru1lpfokdn"
-path="res://.godot/imported/esteira_direita.png-52eddb79974eee655baa364cd561a5cb.ctex"
+uid="uid://dvy5awink2cvi"
+path="res://.godot/imported/cart.png-b95ccd610e61ee24866932efdb5124c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://esteira_direita.png"
-dest_files=["res://.godot/imported/esteira_direita.png-52eddb79974eee655baa364cd561a5cb.ctex"]
+source_file="res://assets/cart.png"
+dest_files=["res://.godot/imported/cart.png-b95ccd610e61ee24866932efdb5124c9.ctex"]
 
 [params]
 
