@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://soeuvp4phwpy"]
+
+[ext_resource type="Script" uid="uid://d16er6a1hfvrq" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://cart.png" id="2_7vrkn"]
+
+[node name="Main Menu" type="Node2D"]
+script = ExtResource("1_06t4h")
+
+[node name="Btn_manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Iniciar" type="Button" parent="Btn_manager"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 80.0
+offset_right = 207.0
+offset_bottom = 111.0
+text = "Iniciar"
+
+[node name="Loja" type="Button" parent="Btn_manager"]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 114.0
+offset_right = 203.0
+offset_bottom = 145.0
+text = "Loja"
+
+[node name="Perfil" type="Button" parent="Btn_manager"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 144.0
+offset_right = 206.0
+offset_bottom = 175.0
+text = "Perfil"
+
+[node name="Sair" type="Button" parent="Btn_manager"]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 7.0
+offset_right = 354.0
+offset_bottom = 38.0
+text = "X"
+
+[node name="Cart" type="Sprite2D" parent="."]
+position = Vector2(267, 76)
+texture = ExtResource("2_7vrkn")
+
+[connection signal="pressed" from="Btn_manager/Iniciar" to="." method="_on_iniciar_pressed"]
+[connection signal="pressed" from="Btn_manager/Loja" to="." method="_on_loja_pressed"]
+[connection signal="pressed" from="Btn_manager/Perfil" to="." method="_on_perfil_pressed"]
+[connection signal="pressed" from="Btn_manager/Sair" to="." method="_on_sair_pressed"]
