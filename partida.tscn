@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c43eeukqucn7u"]
+
+[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://cart.png" id="1_b35dw"]
+[ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://esteira_direita.png" id="1_pncst"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxb2x"]
+atlas = ExtResource("1_pncst")
+region = Rect2(0, 0, 72, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftao2"]
+atlas = ExtResource("1_pncst")
+region = Rect2(0, 16, 72, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xr4ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxb2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftao2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Partida" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(323, 90.5)
+sprite_frames = SubResource("SpriteFrames_xr4ag")
+frame_progress = 0.03242382
+
+[node name="Cart" type="Sprite2D" parent="."]
+position = Vector2(336, 69.5)
+texture = ExtResource("1_b35dw")
