@@ -7,6 +7,10 @@ const CELL_SIZE := 100
 const COLUMNS := 7
 const ROWS := 6
 
+var sprite_empty := preload("res://sprites/caixa_vazia.png")
+var sprite_player1 := preload("res://sprites/caixa_vermelha.png")
+var sprite_player2 := preload("res://sprites/caixa_azul.png")
+
 var offset_x := 0.0
 var offset_y := 0.0
 
@@ -42,13 +46,17 @@ func _draw():
 		for col in range(COLUMNS):
 			var x = offset_x + col * CELL_SIZE
 			var y = offset_y + row * CELL_SIZE
-			var color = Color.LIGHT_GRAY
-			if board.board[row][col] == 1:
-				color = Color.RED
-			elif board.board[row][col] == 2:
-				color = Color.YELLOW
-			draw_rect(Rect2(x, y, CELL_SIZE, CELL_SIZE), color, true)
-			draw_rect(Rect2(x, y, CELL_SIZE, CELL_SIZE), Color.BLACK, false, 2)
+			var cell_val = board.board[row][col]
+			var tex : Texture2D
+			if cell_val == 1:
+				tex = sprite_player1
+			elif cell_val == 2:
+				tex = sprite_player2
+			else:
+				tex = sprite_empty
+			# Centraliza o sprite
+			if tex:
+				draw_texture_rect(tex, Rect2(x, y, CELL_SIZE, CELL_SIZE), false)
 
 func on_game_over(player):
 	show_modal_message("Jogador %d venceu!" % player)
