@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgjxdtxagmkkt"
-path="res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"
+uid="uid://k13vwc2ff4j8"
+path="res://.godot/imported/fundo_gelo.png-981b9df1c00fc3a482e6caae589f16eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fundos/fundo.png"
-dest_files=["res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"]
+source_file="res://assets/fundos/fundo_gelo.png"
+dest_files=["res://.godot/imported/fundo_gelo.png-981b9df1c00fc3a482e6caae589f16eb.ctex"]
 
 [params]
 

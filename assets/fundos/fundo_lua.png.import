@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgjxdtxagmkkt"
-path="res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"
+uid="uid://brhurewro6xsa"
+path="res://.godot/imported/fundo_lua.png-be2f058362cb2bd283a5bcba9271d834.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fundos/fundo.png"
-dest_files=["res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"]
+source_file="res://assets/fundos/fundo_lua.png"
+dest_files=["res://.godot/imported/fundo_lua.png-be2f058362cb2bd283a5bcba9271d834.ctex"]
 
 [params]
 

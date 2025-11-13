@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgjxdtxagmkkt"
-path="res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"
+uid="uid://c8yp8se7h5qir"
+path="res://.godot/imported/fundo_oceano.png-d123eab27dcf8cb3197ff9957fb71e12.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fundos/fundo.png"
-dest_files=["res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"]
+source_file="res://assets/fundos/fundo_oceano.png"
+dest_files=["res://.godot/imported/fundo_oceano.png-d123eab27dcf8cb3197ff9957fb71e12.ctex"]
 
 [params]
 

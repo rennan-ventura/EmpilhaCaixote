@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgjxdtxagmkkt"
-path="res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"
+uid="uid://cp1qwusljbech"
+path="res://.godot/imported/fundo_vulcao.png-89bab96ad3fd8613893c785b10e07c4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fundos/fundo.png"
-dest_files=["res://.godot/imported/fundo.png-fad26e57a5c5f6fd2ea0b5aabd0f3079.ctex"]
+source_file="res://assets/fundos/fundo_vulcao.png"
+dest_files=["res://.godot/imported/fundo_vulcao.png-89bab96ad3fd8613893c785b10e07c4b.ctex"]
 
 [params]
 
