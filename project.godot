@@ -10,11 +10,31 @@ config_version=5
 
 [application]
 
-config/name="Novo Projeto de Jogo2"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/name="GodotWebSocketMultiplayer"
+run/main_scene="uid://b3pil7ks0jcdu"
+config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+WebSocketClient="*res://addons/SimpleMultiplayer/websocket_client.gd"
+MultiplayerManager="*res://addons/SimpleMultiplayer/multiplayer_manager.tscn"
+
+[display]
+
+window/size/mode=4
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SimpleMultiplayer/plugin.cfg")
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
+
+[simple_multiplayer]
+
+server_url="ws://localhost:9090"

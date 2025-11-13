@@ -16,6 +16,9 @@ signal spawn_network_players(players_data)
 signal update_position(position_data)
 signal player_disconnected(player_data)
 
+# Empilha Caixote
+signal box_drop(data)
+
 var uuid: String = ""              # Identificador único do jogador
 var _peer := WebSocketPeer.new()   # Conexão WebSocket
 var _is_connected := false         # Flag de conexão
@@ -68,6 +71,9 @@ func handle_incoming_data(data: Dictionary):
 	var content = data.get("content", {})
 	
 	match cmd:
+		"box_drop":
+			emit_signal("box_drop", content)
+			print("Server ok")
 		"joined_server":
 			uuid = content.get("uuid", "")
 			emit_signal("connection_succeeded")

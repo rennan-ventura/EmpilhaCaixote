@@ -78,7 +78,7 @@ func _connect_signals():
 		ws_client.connect("spawn_new_player", Callable(self, "_on_spawn_new_player"))
 		ws_client.connect("spawn_network_players", Callable(self, "_on_spawn_network_players"))
 		ws_client.connect("update_position", Callable(self, "_on_update_position"))
-		ws_client.connect("player_disconnected", Callable(self, "_on_player_disconnected"))
+		ws_client.connect("player_disconnected", Callable(self, "_on_player_disconnected"))		
 		print("Sinais de gameplay conectados com sucesso")
 	else:
 		print("WebSocketClient não encontrado")
@@ -112,3 +112,4 @@ func _on_player_disconnected(player_data: Dictionary):
 	var uuid = player_data.get("uuid", "")
 	if uuid and player_nodes.has(uuid):
 		remove_player(uuid)
+		
