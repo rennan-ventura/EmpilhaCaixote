@@ -1,7 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://c43eeukqucn7u"]
+[gd_scene load_steps=22 format=3 uid="uid://c43eeukqucn7u"]
 
 [ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="1_b35dw"]
-[ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://assets/esteira_direita.png" id="1_pncst"]
+[ext_resource type="Texture2D" uid="uid://bw70sacx4cbf5" path="res://assets/fundos/fundo.png" id="1_fxb2x"]
+[ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://assets/esteira.png" id="1_pncst"]
+[ext_resource type="Texture2D" uid="uid://bylacrivjblce" path="res://assets/metal_pipe.png" id="4_xr4ag"]
+[ext_resource type="Texture2D" uid="uid://dl0ynjbe5daeu" path="res://assets/metal_caixa.png" id="5_sajtd"]
+[ext_resource type="Texture2D" uid="uid://4bt40mn4jbnu" path="res://assets/tabuleiro.png" id="6_sajtd"]
+[ext_resource type="Texture2D" uid="uid://cwd18slqtmsnp" path="res://assets/pe_tabuleiro.png" id="7_j0csv"]
+[ext_resource type="Texture2D" uid="uid://b7y4ovyb2cxn" path="res://assets/cinto.png" id="8_043r5"]
+[ext_resource type="Texture2D" uid="uid://x2fuwq0frc3m" path="res://assets/tela_digital.png" id="8_sqgtc"]
+[ext_resource type="Texture2D" uid="uid://bnioryehqj5y5" path="res://assets/claw_gray_1.png" id="9_5lwrr"]
+[ext_resource type="Texture2D" uid="uid://bahdv4yo381df" path="res://assets/card_habilidade.png" id="9_kuanu"]
+[ext_resource type="Texture2D" uid="uid://445xr7pwh1x6" path="res://assets/claw_gray_pole.png" id="10_8wu3b"]
+[ext_resource type="Texture2D" uid="uid://dwu3micvapads" path="res://assets/bolso.png" id="10_kfm3e"]
+[ext_resource type="Texture2D" uid="uid://bib63jrac01qd" path="res://assets/caixa_vermelho_x.png" id="11_68i2n"]
+[ext_resource type="Texture2D" uid="uid://c31qkq6k64o42" path="res://assets/caixa_azul_o.png" id="12_8rq8l"]
+[ext_resource type="Texture2D" uid="uid://jssd36ovftud" path="res://assets/player_loiro_1.png" id="16_8neug"]
+[ext_resource type="Texture2D" uid="uid://cvn10bsiukqgy" path="res://assets/player_moren_1.png" id="17_vql25"]
+[ext_resource type="Texture2D" uid="uid://chq17dc4kd71j" path="res://assets/empty_point.png" id="18_5lwrr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxb2x"]
 atlas = ExtResource("1_pncst")
@@ -22,16 +38,170 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 10.0
+"speed": 5.0
 }]
 
 [node name="Partida" type="Node2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(323, 90.5)
+[node name="Fundo" type="Sprite2D" parent="."]
+position = Vector2(180.50002, 90.5)
+scale = Vector2(0.3525391, 0.32118052)
+texture = ExtResource("1_fxb2x")
+
+[node name="esteira" type="AnimatedSprite2D" parent="."]
+position = Vector2(301, 90)
 sprite_frames = SubResource("SpriteFrames_xr4ag")
-frame_progress = 0.107438736
+frame_progress = 0.32720998
 
 [node name="Cart" type="Sprite2D" parent="."]
 position = Vector2(336, 69.5)
 texture = ExtResource("1_b35dw")
+
+[node name="esteira2" type="AnimatedSprite2D" parent="."]
+position = Vector2(61, 85)
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_xr4ag")
+frame_progress = 0.1037115
+
+[node name="Cart2" type="Sprite2D" parent="."]
+position = Vector2(24, 65)
+scale = Vector2(-1, 1)
+texture = ExtResource("1_b35dw")
+
+[node name="MetalPipe" type="Sprite2D" parent="."]
+position = Vector2(321, 106)
+texture = ExtResource("4_xr4ag")
+
+[node name="MetalCaixa2" type="Sprite2D" parent="MetalPipe"]
+position = Vector2(-48, 0)
+texture = ExtResource("5_sajtd")
+
+[node name="MetalPipe2" type="Sprite2D" parent="."]
+position = Vector2(40, 101)
+scale = Vector2(-1, 1)
+texture = ExtResource("4_xr4ag")
+
+[node name="MetalCaixa" type="Sprite2D" parent="MetalPipe2"]
+position = Vector2(-48, 0)
+texture = ExtResource("5_sajtd")
+
+[node name="Tabuleiro" type="Sprite2D" parent="."]
+position = Vector2(176, 112)
+texture = ExtResource("6_sajtd")
+
+[node name="PeTabuleiro" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(-1, 58)
+scale = Vector2(2, 1)
+texture = ExtResource("7_j0csv")
+
+[node name="TelaDigital3" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(1, 55.5)
+texture = ExtResource("8_sqgtc")
+
+[node name="EmptyPoint" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(-54, 57.5)
+texture = ExtResource("18_5lwrr")
+
+[node name="EmptyPoint2" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(-48, 57.5)
+texture = ExtResource("18_5lwrr")
+
+[node name="EmptyPoint3" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(-42, 57.5)
+texture = ExtResource("18_5lwrr")
+
+[node name="EmptyPoint4" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(41, 57.5)
+texture = ExtResource("18_5lwrr")
+
+[node name="EmptyPoint5" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(47, 57.5)
+texture = ExtResource("18_5lwrr")
+
+[node name="EmptyPoint6" type="Sprite2D" parent="Tabuleiro"]
+position = Vector2(53, 57.5)
+texture = ExtResource("18_5lwrr")
+
+[node name="ClawGray1" type="Sprite2D" parent="."]
+position = Vector2(82, 50)
+texture = ExtResource("9_5lwrr")
+
+[node name="ClawGrayPole" type="Sprite2D" parent="ClawGray1"]
+position = Vector2(0, -40)
+scale = Vector2(1, 2)
+texture = ExtResource("10_8wu3b")
+
+[node name="ClawGray2" type="Sprite2D" parent="."]
+position = Vector2(279, 48)
+texture = ExtResource("9_5lwrr")
+
+[node name="ClawGrayPole" type="Sprite2D" parent="ClawGray2"]
+position = Vector2(0, -40)
+scale = Vector2(1, 2)
+texture = ExtResource("10_8wu3b")
+
+[node name="Cinto" type="Sprite2D" parent="."]
+position = Vector2(316, 170)
+texture = ExtResource("8_043r5")
+
+[node name="Cinto2" type="Sprite2D" parent="."]
+position = Vector2(44, 170)
+scale = Vector2(-0.9999982, 1)
+texture = ExtResource("8_043r5")
+
+[node name="CardHabilidade" type="Sprite2D" parent="."]
+position = Vector2(16, 160)
+texture = ExtResource("9_kuanu")
+
+[node name="CardHabilidade2" type="Sprite2D" parent="."]
+position = Vector2(64, 160)
+texture = ExtResource("9_kuanu")
+
+[node name="CardHabilidade3" type="Sprite2D" parent="."]
+position = Vector2(296, 160)
+texture = ExtResource("9_kuanu")
+
+[node name="CardHabilidade4" type="Sprite2D" parent="."]
+position = Vector2(344, 160)
+texture = ExtResource("9_kuanu")
+
+[node name="Bolso" type="Sprite2D" parent="."]
+position = Vector2(16, 169)
+texture = ExtResource("10_kfm3e")
+
+[node name="Bolso2" type="Sprite2D" parent="."]
+position = Vector2(64, 169)
+texture = ExtResource("10_kfm3e")
+
+[node name="Bolso3" type="Sprite2D" parent="."]
+position = Vector2(296, 169)
+texture = ExtResource("10_kfm3e")
+
+[node name="Bolso4" type="Sprite2D" parent="."]
+position = Vector2(344, 169)
+texture = ExtResource("10_kfm3e")
+
+[node name="CaixaVermelhoX" type="Sprite2D" parent="."]
+position = Vector2(83, 74)
+texture = ExtResource("11_68i2n")
+
+[node name="CaixaAzulO" type="Sprite2D" parent="."]
+position = Vector2(280, 79)
+texture = ExtResource("12_8rq8l")
+
+[node name="PlayerLoiro1" type="Sprite2D" parent="."]
+position = Vector2(28, 70)
+texture = ExtResource("16_8neug")
+
+[node name="PlayerMoren1" type="Sprite2D" parent="."]
+position = Vector2(332, 74)
+scale = Vector2(-1.0000098, 1)
+texture = ExtResource("17_vql25")
+
+[node name="TelaDigital" type="Sprite2D" parent="."]
+position = Vector2(80, 116)
+texture = ExtResource("8_sqgtc")
+
+[node name="TelaDigital2" type="Sprite2D" parent="."]
+position = Vector2(281, 121)
+texture = ExtResource("8_sqgtc")

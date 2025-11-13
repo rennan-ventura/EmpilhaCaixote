@@ -1,10 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://soeuvp4phwpy"]
+[gd_scene load_steps=5 format=3 uid="uid://soeuvp4phwpy"]
 
 [ext_resource type="Script" uid="uid://d16er6a1hfvrq" path="res://main_menu.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="2_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="2_7vrkn"]
+[ext_resource type="Theme" uid="uid://6afsekjrv8ik" path="res://assets/default.tres" id="2_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://c25oo1c546hyj" path="res://assets/logo.svg" id="3_jix8l"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_06t4h")
+
+[node name="Menu" type="Sprite2D" parent="."]
+show_behind_parent = true
+light_mask = 2
+visibility_layer = 128
+position = Vector2(180, 90)
+texture = ExtResource("2_7vrkn")
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(181, 47.000004)
+scale = Vector2(0.20871559, 0.20871559)
+texture = ExtResource("3_jix8l")
 
 [node name="Btn_manager" type="Control" parent="."]
 layout_mode = 3
@@ -13,44 +27,48 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Iniciar" type="Button" parent="Btn_manager"]
+top_level = true
 layout_mode = 0
-offset_left = 163.0
-offset_top = 91.0
-offset_right = 194.0
-offset_bottom = 108.0
+offset_left = 168.0
+offset_top = 100.0
+offset_right = 199.0
+offset_bottom = 117.0
+theme = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 6
 text = "Iniciar"
 
 [node name="Loja" type="Button" parent="Btn_manager"]
+top_level = true
 layout_mode = 0
-offset_left = 163.0
-offset_top = 110.0
-offset_right = 194.0
-offset_bottom = 127.0
+offset_left = 168.0
+offset_top = 120.0
+offset_right = 199.0
+offset_bottom = 137.0
+theme = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 6
 text = "Loja"
 
 [node name="Perfil" type="Button" parent="Btn_manager"]
+top_level = true
 layout_mode = 0
-offset_left = 163.0
-offset_top = 132.0
-offset_right = 193.0
-offset_bottom = 152.0
+offset_left = 168.0
+offset_top = 141.0
+offset_right = 198.0
+offset_bottom = 158.0
+theme = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 6
 text = "Perfil"
 
 [node name="Sair" type="Button" parent="Btn_manager"]
 layout_mode = 0
-offset_left = 333.0
-offset_top = 7.0
-offset_right = 351.0
-offset_bottom = 24.0
-theme_override_font_sizes/font_size = 6
+offset_left = 336.0
+offset_top = 5.0
+offset_right = 354.0
+offset_bottom = 22.0
+theme_override_colors/font_color = Color(1, 0.01999998, 0.036333084, 1)
+theme_override_font_sizes/font_size = 9
+button_mask = 0
 text = "X"
-
-[node name="Cart" type="Sprite2D" parent="."]
-position = Vector2(327, 78)
-texture = ExtResource("2_7vrkn")
 
 [connection signal="pressed" from="Btn_manager/Iniciar" to="." method="_on_iniciar_pressed"]
 [connection signal="pressed" from="Btn_manager/Loja" to="." method="_on_loja_pressed"]
