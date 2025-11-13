@@ -59,10 +59,37 @@ func _draw():
 				draw_texture_rect(tex, Rect2(x, y, CELL_SIZE, CELL_SIZE), false)
 
 func on_game_over(player):
-	show_modal_message("Jogador %d venceu!" % player)
+	var dialog = ConfirmationDialog.new()
+	add_child(dialog)
+	dialog.title = "Fim de Jogo"
+	if player == 0:
+		dialog.get_label().text = "Empate! Não há mais jogadas."
+	else:
+		dialog.get_label().text = "Jogador %d venceu!" % player
 
+	dialog.get_ok_button().text = "Reiniciar"
+	dialog.get_cancel_button().text = "Fechar"
+
+	dialog.connect("confirmed", Callable(self, "_on_restart_pressed").bind(dialog))
+	dialog.connect("canceled", Callable(self, "_on_quit_pressed").bind(dialog))
+	dialog.popup_centered()
+
+	
 func show_modal_message(msg):
 	var dialog = AcceptDialog.new()
 	dialog.dialog_text = msg
 	add_child(dialog)
 	dialog.popup_centered()
+	
+func _on_restart_pressed(dialog):
+	dialog.hide()
+	board.board.clear()
+	for i in range(ROWS):
+		board.board.append([])
+		for j in range(COLUMNS):
+			board.board[-1].append(0)
+	board.current_player = 1
+	queue_redraw()
+
+func _on_quit_pressed(dialog):
+	get_tree().quit()

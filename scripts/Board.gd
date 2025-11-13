@@ -14,6 +14,14 @@ func _ready():
 		board.append([])
 		for j in range(COLUMNS):
 			board[-1].append(0)
+			
+#Verifica se está o tabuleiro está cheio
+func is_full() -> bool:
+	for row in board:
+		for cell in row:
+			if cell == 0:
+				return false
+	return true
 
 func place_piece(column: int) -> bool:
 	for row in range(ROWS - 1, -1, -1):
@@ -22,6 +30,8 @@ func place_piece(column: int) -> bool:
 			emit_signal("board_updated")
 			if check_win(row, column):
 				get_tree().call_group("ui", "on_game_over", current_player)
+			elif is_full():
+				get_tree().call_group("ui", "on_game_over", 0) # 0 significa empate
 			else:
 				current_player = 3 - current_player
 			return true
