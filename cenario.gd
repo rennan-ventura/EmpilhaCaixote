@@ -1,10 +1,11 @@
 extends Node2D
 
+
 var server_handle
 @export var box: PackedScene = preload("res://box.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	
 	var player_container = $PlayerContainer
 	var mp_manager = get_node("/root/MultiplayerManager")
 	if mp_manager and mp_manager.has_method("set_player_container"):
@@ -39,6 +40,5 @@ func _unhandled_input(event):
 				var local_pos = get_viewport().get_camera_2d().get_global_mouse_position()
 				server_handle.send_message("box_drop", {"pos_x": snapped(local_pos.x, 64)})
 				
-
 func _on_box_drop(data):
 	_spawn_box(data["x"]["pos_x"], data["z"])
