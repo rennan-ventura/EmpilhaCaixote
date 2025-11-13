@@ -71,9 +71,10 @@ func handle_incoming_data(data: Dictionary):
 	var content = data.get("content", {})
 	
 	match cmd:
+		
 		"box_drop":
 			emit_signal("box_drop", content)
-			print("Server ok")
+			
 		"joined_server":
 			uuid = content.get("uuid", "")
 			emit_signal("connection_succeeded")

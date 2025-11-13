@@ -12,16 +12,23 @@ func _ready() -> void:
 		print("PlayerContainer registrado no MultiplayerManager")
 	server_handle = get_node("/root/WebSocketClient")
 	server_handle.connect("box_drop", Callable(self, "_on_box_drop"))
-	print("??")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func _spawn_box(data: int) -> void:
+func _spawn_box(data: int, color: String) -> void:
 	var box_instance := box.instantiate()
 	box_instance.position.x = snapped(data, 64)
 	box_instance.position.y = -200
+	match color:
+		"red":
+			box_instance.modulate = Color.LIGHT_CORAL
+		"blue":
+			box_instance.modulate = Color.LIGHT_BLUE
+		_:
+			box_instance.modulate = Color.WHITE
+
 	add_child(box_instance)
 
 
@@ -31,10 +38,7 @@ func _unhandled_input(event):
 			if event.pressed:
 				var local_pos = get_viewport().get_camera_2d().get_global_mouse_position()
 				server_handle.send_message("box_drop", {"pos_x": snapped(local_pos.x, 64)})
-				print("input ok")
-				
 				
 
 func _on_box_drop(data):
-	print("signal_ok")
-	_spawn_box(data["pos_x"])
+	_spawn_box(data["x"]["pos_x"], data["z"])
