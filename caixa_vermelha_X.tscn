@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://uydxykb80883"]
+
+[ext_resource type="Texture2D" uid="uid://bib63jrac01qd" path="res://assets/caixa_vermelho_x.png" id="1_lq7ea"]
+[ext_resource type="Script" uid="uid://bhpth2yo4iqmq" path="res://caixa_vermelha_x.gd" id="1_m0kso"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0kso"]
+size = Vector2(16, 16)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_m0kso")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lq7ea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m0kso")

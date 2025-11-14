@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://c43eeukqucn7u"]
+[gd_scene load_steps=27 format=3 uid="uid://c43eeukqucn7u"]
 
 [ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="1_b35dw"]
-[ext_resource type="Texture2D" uid="uid://bw70sacx4cbf5" path="res://assets/fundos/fundo.png" id="1_fxb2x"]
+[ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="1_fxb2x"]
 [ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://assets/esteira.png" id="1_pncst"]
 [ext_resource type="Texture2D" uid="uid://bylacrivjblce" path="res://assets/metal_pipe.png" id="4_xr4ag"]
 [ext_resource type="Texture2D" uid="uid://dl0ynjbe5daeu" path="res://assets/metal_caixa.png" id="5_sajtd"]
@@ -11,13 +11,16 @@
 [ext_resource type="Texture2D" uid="uid://x2fuwq0frc3m" path="res://assets/tela_digital.png" id="8_sqgtc"]
 [ext_resource type="Texture2D" uid="uid://bnioryehqj5y5" path="res://assets/claw_gray_1.png" id="9_5lwrr"]
 [ext_resource type="Texture2D" uid="uid://bahdv4yo381df" path="res://assets/card_habilidade.png" id="9_kuanu"]
+[ext_resource type="Script" uid="uid://4mcwty7wgswp" path="res://Scripts/rightClaw.gd" id="10_8neug"]
 [ext_resource type="Texture2D" uid="uid://445xr7pwh1x6" path="res://assets/claw_gray_pole.png" id="10_8wu3b"]
 [ext_resource type="Texture2D" uid="uid://dwu3micvapads" path="res://assets/bolso.png" id="10_kfm3e"]
+[ext_resource type="Script" uid="uid://cxoqfv85hy0la" path="res://Scripts/leftClaw.gd" id="10_vql25"]
 [ext_resource type="Texture2D" uid="uid://bib63jrac01qd" path="res://assets/caixa_vermelho_x.png" id="11_68i2n"]
 [ext_resource type="Texture2D" uid="uid://c31qkq6k64o42" path="res://assets/caixa_azul_o.png" id="12_8rq8l"]
 [ext_resource type="Texture2D" uid="uid://jssd36ovftud" path="res://assets/player_loiro_1.png" id="16_8neug"]
 [ext_resource type="Texture2D" uid="uid://cvn10bsiukqgy" path="res://assets/player_moren_1.png" id="17_vql25"]
 [ext_resource type="Texture2D" uid="uid://chq17dc4kd71j" path="res://assets/empty_point.png" id="18_5lwrr"]
+[ext_resource type="PackedScene" uid="uid://xunb5wcyavhs" path="res://statictest.tscn" id="20_8neug"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxb2x"]
 atlas = ExtResource("1_pncst")
@@ -40,6 +43,12 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wu3b"]
+size = Vector2(6, 29.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8neug"]
+size = Vector2(6, 58)
 
 [node name="Partida" type="Node2D"]
 
@@ -122,23 +131,44 @@ texture = ExtResource("18_5lwrr")
 position = Vector2(53, 57.5)
 texture = ExtResource("18_5lwrr")
 
-[node name="ClawGray1" type="Sprite2D" parent="."]
-position = Vector2(82, 50)
+[node name="Claw1" type="CharacterBody2D" parent="."]
+position = Vector2(82, 6)
+scale = Vector2(1, 2)
+disable_mode = 2
+script = ExtResource("10_vql25")
+
+[node name="ClawGray1" type="Sprite2D" parent="Claw1"]
+position = Vector2(0, 20)
+scale = Vector2(1, 0.5)
 texture = ExtResource("9_5lwrr")
 
-[node name="ClawGrayPole" type="Sprite2D" parent="ClawGray1"]
+[node name="ClawGrayPole" type="Sprite2D" parent="Claw1/ClawGray1"]
 position = Vector2(0, -40)
 scale = Vector2(1, 2)
 texture = ExtResource("10_8wu3b")
 
-[node name="ClawGray2" type="Sprite2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw1"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_8wu3b")
+
+[node name="Marker2D" type="Marker2D" parent="Claw1"]
+position = Vector2(1, 21.5)
+
+[node name="Claw2" type="CharacterBody2D" parent="."]
 position = Vector2(279, 48)
+script = ExtResource("10_8neug")
+
+[node name="ClawGray2" type="Sprite2D" parent="Claw2"]
 texture = ExtResource("9_5lwrr")
 
-[node name="ClawGrayPole" type="Sprite2D" parent="ClawGray2"]
+[node name="ClawGrayPole" type="Sprite2D" parent="Claw2/ClawGray2"]
 position = Vector2(0, -40)
 scale = Vector2(1, 2)
 texture = ExtResource("10_8wu3b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw2"]
+position = Vector2(0, -41)
+shape = SubResource("RectangleShape2D_8neug")
 
 [node name="Cinto" type="Sprite2D" parent="."]
 position = Vector2(316, 170)
@@ -205,3 +235,9 @@ texture = ExtResource("8_sqgtc")
 [node name="TelaDigital2" type="Sprite2D" parent="."]
 position = Vector2(281, 121)
 texture = ExtResource("8_sqgtc")
+
+[node name="InvisibleWall" parent="." instance=ExtResource("20_8neug")]
+position = Vector2(50, 13)
+
+[node name="invisibleWall" parent="." instance=ExtResource("20_8neug")]
+position = Vector2(310, 11)
