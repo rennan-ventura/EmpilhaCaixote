@@ -148,14 +148,7 @@ theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_y06mq")
 theme_override_font_sizes/font_size = 6
 theme_override_styles/read_only = SubResource("StyleBoxFlat_dnune")
-text = "4 em Linha é um duelo rápido
-onde dois jogadores deixam 
-peças caírem numa grade 
-tentando formar quatro
-seguidas antes do outro.
-Simples, viciante e cheio
-de “ops, te dei a vitória
-sem querer”."
+text = "jhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywert"
 placeholder_text = "czczfdfsdfdsfs"
 editable = false
 context_menu_enabled = false
