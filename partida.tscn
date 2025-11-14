@@ -17,8 +17,8 @@
 [ext_resource type="Script" uid="uid://cxoqfv85hy0la" path="res://Scripts/leftClaw.gd" id="10_vql25"]
 [ext_resource type="Texture2D" uid="uid://bib63jrac01qd" path="res://assets/caixa_vermelho_x.png" id="11_68i2n"]
 [ext_resource type="Texture2D" uid="uid://c31qkq6k64o42" path="res://assets/caixa_azul_o.png" id="12_8rq8l"]
-[ext_resource type="Texture2D" uid="uid://jssd36ovftud" path="res://assets/player_loiro_1.png" id="16_8neug"]
-[ext_resource type="Texture2D" uid="uid://cvn10bsiukqgy" path="res://assets/player_moren_1.png" id="17_vql25"]
+[ext_resource type="Texture2D" uid="uid://jssd36ovftud" path="res://assets/players/player_loiro_1.png" id="16_8neug"]
+[ext_resource type="Texture2D" uid="uid://cvn10bsiukqgy" path="res://assets/players/player_moren_1.png" id="17_vql25"]
 [ext_resource type="Texture2D" uid="uid://chq17dc4kd71j" path="res://assets/empty_point.png" id="18_5lwrr"]
 [ext_resource type="PackedScene" uid="uid://xunb5wcyavhs" path="res://statictest.tscn" id="20_8neug"]
 
