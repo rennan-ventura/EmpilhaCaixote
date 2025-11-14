@@ -1,0 +1,349 @@
+[gd_scene load_steps=17 format=3 uid="uid://r2yg1e1xjorx"]
+
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_tk7c1"]
+[ext_resource type="FontFile" uid="uid://bn6yulwl7r2tv" path="res://assets/VCR_OSD_MONO_1.001.ttf" id="2_y06mq"]
+[ext_resource type="FontFile" uid="uid://c3gtoguywchdc" path="res://assets/PressStart2P.ttf" id="3_apbm5"]
+[ext_resource type="Texture2D" uid="uid://dw2qep5uxx5pv" path="res://icon.svg" id="3_dnune"]
+[ext_resource type="Texture2D" uid="uid://dnl0yqvypqjmt" path="res://assets/botao.png" id="3_ohlig"]
+[ext_resource type="Texture2D" uid="uid://c25oo1c546hyj" path="res://assets/logo.svg" id="5_apbm5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tk7c1"]
+bg_color = Color(0.65882355, 0.7019608, 0.7176471, 0.8862745)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y06mq"]
+bg_color = Color(0.42749333, 0.427493, 0.42749295, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3rpuc"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ohlig"]
+content_margin_left = 11.0
+content_margin_top = 0.0
+content_margin_right = 11.0
+content_margin_bottom = 0.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjc5n"]
+content_margin_left = 11.0
+content_margin_top = 0.0
+content_margin_right = 11.0
+content_margin_bottom = 0.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apbm5"]
+content_margin_left = 12.0
+content_margin_top = 0.0
+content_margin_right = 11.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_color = Color(0.6, 0.6, 0.6, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vi5j5"]
+content_margin_left = 12.0
+content_margin_top = 0.0
+content_margin_right = 11.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dnune"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apbm5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dnune"]
+
+[node name="Info" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(180, 90)
+texture = ExtResource("1_tk7c1")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 68.0
+offset_top = 3.0
+offset_right = 295.0
+offset_bottom = 178.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tk7c1")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 75.0
+offset_top = 9.0
+offset_right = 288.0
+offset_bottom = 153.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y06mq")
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 93.0
+offset_top = 105.0
+offset_right = 273.0
+offset_bottom = 145.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3rpuc")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+clip_contents = true
+layout_direction = 2
+offset_left = 93.0
+offset_top = 39.0
+offset_right = 273.0
+offset_bottom = 137.0
+localize_numeral_system = false
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_ohlig")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_qjc5n")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_apbm5")
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_vi5j5")
+tab_alignment = 1
+current_tab = 0
+tabs_rearrange_group = 0
+tab_focus_mode = 1
+
+[node name="TUTORIAL" type="TextEdit" parent="TabContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/read_only = SubResource("StyleBoxFlat_dnune")
+text = "safsafafsafsafafsafsafaf
+fassafsafafsafsafafsafsafaf
+fassafsafafsafsafafsafsafaf
+fassafsafafsafsafafsafsafaf
+fsafsafafsafsafafsafsafaf
+afsafsafafsafsafafsafsafaf
+asfsafsafafsafsafafsafsafaf
+assafsafafsafsafafsafsafaf
+safsafafsafsafafsafsafafsafsafafsafsafafsafsafafsafsafafsafsafaf
+f
+asf
+asf
+as
+fa
+sf
+asf
+af
+as
+f
+asf
+a
+sf
+
+f
+af
+"
+placeholder_text = "czczfdfsdfdsfs"
+editable = false
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+minimap_width = 55
+metadata/_tab_index = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="TabContainer/TUTORIAL"]
+position = Vector2(139, 42)
+scale = Vector2(0.4609375, 0.4609375)
+texture = ExtResource("3_dnune")
+
+[node name="PODERES" type="TextEdit" parent="TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/read_only = SubResource("StyleBoxFlat_dnune")
+text = "jhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywert"
+placeholder_text = "
+"
+editable = false
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+metadata/_tab_index = 1
+
+[node name="REGRAS" type="TextEdit" parent="TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/read_only = SubResource("StyleBoxFlat_dnune")
+text = "jhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywert"
+placeholder_text = "
+"
+editable = false
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+metadata/_tab_index = 2
+
+[node name="LOJA" type="TextEdit" parent="TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/read_only = SubResource("StyleBoxFlat_dnune")
+text = "jhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywertjhjghjghjghjuywert"
+placeholder_text = "
+"
+editable = false
+context_menu_enabled = false
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+metadata/_tab_index = 3
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.44400004
+anchor_top = 0.69200003
+anchor_right = 0.44400004
+anchor_bottom = 0.69200003
+offset_left = 232.99998
+offset_top = 159.0
+offset_right = 1828.0
+offset_bottom = 842.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.99607843, 0.98039216, 0.019607844, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 241
+text = "INICIAR"
+icon = ExtResource("3_ohlig")
+flat = true
+icon_alignment = 1
+
+[node name="Button2" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.44400004
+anchor_top = 0.69200003
+anchor_right = 0.44400004
+anchor_bottom = 0.69200003
+offset_left = 185.0
+offset_top = 159.00002
+offset_right = 1780.0
+offset_bottom = 842.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.99607843, 0.98039216, 0.019607844, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 241
+text = "LOJA"
+icon = ExtResource("3_ohlig")
+flat = true
+icon_alignment = 1
+
+[node name="Button3" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.44400004
+anchor_top = 0.69200003
+anchor_right = 0.44400004
+anchor_bottom = 0.69200003
+offset_left = 133.00002
+offset_top = 159.0
+offset_right = 1728.0
+offset_bottom = 842.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.99607843, 0.98039216, 0.019607844, 1)
+theme_override_colors/font_hover_color = Color(0.99607843, 0.98039216, 0.019607844, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.99607843, 0.98039216, 0.019607844, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 286
+action_mode = 0
+keep_pressed_outside = true
+text = "PERFIL"
+icon = ExtResource("3_ohlig")
+flat = true
+icon_alignment = 1
+
+[node name="Button4" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.44400004
+anchor_top = 0.69200003
+anchor_right = 0.44400004
+anchor_bottom = 0.69200003
+offset_left = 85.00001
+offset_top = 159.00002
+offset_right = 1680.0
+offset_bottom = 842.0
+scale = Vector2(0.025, 0.025)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.99607843, 0.98039216, 0.019607844, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_y06mq")
+theme_override_font_sizes/font_size = 266
+text = "VOLTAR"
+icon = ExtResource("3_ohlig")
+flat = true
+icon_alignment = 1
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(33, 27)
+scale = Vector2(0.13188069, 0.1318807)
+texture = ExtResource("5_apbm5")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 95.0
+offset_top = 10.0
+offset_right = 288.0
+offset_bottom = 41.0
+theme_override_colors/font_uneditable_color = Color(0.29803923, 0.99607843, 0.019607844, 1)
+theme_override_fonts/font = ExtResource("3_apbm5")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_apbm5")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_dnune")
+text = "INFORMAÇÕES"
+editable = false
