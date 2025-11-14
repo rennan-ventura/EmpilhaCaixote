@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvn10bsiukqgy"
-path="res://.godot/imported/player_moren_1.png-2d2c67731f4190796c89e9939b6fc14c.ctex"
+path="res://.godot/imported/player_moren_1.png-1b5598d9027394afc5bcbbe08d7507af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player_moren_1.png"
-dest_files=["res://.godot/imported/player_moren_1.png-2d2c67731f4190796c89e9939b6fc14c.ctex"]
+source_file="res://assets/players/player_moren_1.png"
+dest_files=["res://.godot/imported/player_moren_1.png-1b5598d9027394afc5bcbbe08d7507af.ctex"]
 
 [params]
 

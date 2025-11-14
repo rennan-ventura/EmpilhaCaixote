@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3mvlg01m2uhq"
-path="res://.godot/imported/player_loiro_2.png-511d6043047c70c830d055b62c41acfc.ctex"
+uid="uid://chivp88x60qtr"
+path="res://.godot/imported/player_loiro_sem capacete.png-0c3a41bcfbcc87b64ee9578bab8e1c5f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player_loiro_2.png"
-dest_files=["res://.godot/imported/player_loiro_2.png-511d6043047c70c830d055b62c41acfc.ctex"]
+source_file="res://assets/players/player_loiro_sem capacete.png"
+dest_files=["res://.godot/imported/player_loiro_sem capacete.png-0c3a41bcfbcc87b64ee9578bab8e1c5f.ctex"]
 
 [params]
 
