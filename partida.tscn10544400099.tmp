@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c43eeukqucn7u"]
+[gd_scene load_steps=26 format=3 uid="uid://c43eeukqucn7u"]
 
 [ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="1_b35dw"]
 [ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="1_fxb2x"]
@@ -16,8 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://c31qkq6k64o42" path="res://assets/caixa_azul_o.png" id="12_8rq8l"]
 [ext_resource type="Texture2D" uid="uid://jssd36ovftud" path="res://assets/players/player_loiro_1.png" id="16_8neug"]
 [ext_resource type="Texture2D" uid="uid://cvn10bsiukqgy" path="res://assets/players/player_moren_1.png" id="17_vql25"]
-[ext_resource type="Texture2D" uid="uid://4bt40mn4jbnu" path="res://assets/tabuleiro.png" id="18_vql25"]
-[ext_resource type="Texture2D" uid="uid://cwd18slqtmsnp" path="res://assets/pe_tabuleiro.png" id="19_8ciw8"]
 [ext_resource type="PackedScene" uid="uid://xunb5wcyavhs" path="res://statictest.tscn" id="20_8neug"]
 [ext_resource type="PackedScene" uid="uid://dsgof3lj0ld80" path="res://BasePlate.tscn" id="22_8ciw8"]
 [ext_resource type="PackedScene" uid="uid://uydxykb80883" path="res://caixa_vermelha_X.tscn" id="22_w6ttt"]
@@ -212,17 +210,8 @@ position = Vector2(50, 13)
 [node name="invisibleWall" parent="." instance=ExtResource("20_8neug")]
 position = Vector2(310, 11)
 
-[node name="tabuleiro" type="Sprite2D" parent="."]
-position = Vector2(181, 107)
-texture = ExtResource("18_vql25")
-
-[node name="pe_tabuleiro" type="Sprite2D" parent="tabuleiro"]
-position = Vector2(1, 58)
-scale = Vector2(1.9843752, 1)
-texture = ExtResource("19_8ciw8")
-
 [node name="invisibleWall2" parent="." instance=ExtResource("22_8ciw8")]
-position = Vector2(155, 166)
+position = Vector2(148, 171)
 
 [node name="caixa_vermelha_x" parent="." instance=ExtResource("22_w6ttt")]
 position = Vector2(82, 74)
