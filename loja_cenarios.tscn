@@ -1,0 +1,265 @@
+[gd_scene load_steps=17 format=3 uid="uid://bww083flbc42n"]
+
+[ext_resource type="Texture2D" uid="uid://bf5w6hm11mtdc" path="res://prefabs/backgound.png" id="1_037yi"]
+[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://prefabs/retanguloTras.png" id="2_4vba8"]
+[ext_resource type="Texture2D" uid="uid://ddcukdvh3hq4j" path="res://prefabs/retanguloFrente.png" id="3_sbmhr"]
+[ext_resource type="Texture2D" uid="uid://81p08oflwakn" path="res://prefabs/LOJA.png" id="4_rculp"]
+[ext_resource type="Texture2D" uid="uid://c8cshibv4x1np" path="res://prefabs/poderes.png" id="5_ir03e"]
+[ext_resource type="Texture2D" uid="uid://d38dv4vmvlm5f" path="res://prefabs/cenarios.png" id="6_0ibcj"]
+[ext_resource type="Texture2D" uid="uid://dvwigfyhxsu2h" path="res://prefabs/moedas.png" id="7_1fdrg"]
+[ext_resource type="Texture2D" uid="uid://i2a18q6x2cle" path="res://prefabs/diamantes.png" id="8_qect5"]
+[ext_resource type="Texture2D" uid="uid://cj61s1u31p56a" path="res://prefabs/retanguloMeio.png" id="9_d4i3e"]
+[ext_resource type="Texture2D" uid="uid://mycyh2vv7fng" path="res://prefabs/retanguloItem.png" id="10_lfpgl"]
+[ext_resource type="Texture2D" uid="uid://djg8jhi80ggox" path="res://prefabs/poder1.png" id="11_ir03e"]
+[ext_resource type="Texture2D" uid="uid://cf5krnmwqvp8h" path="res://prefabs/excluir.png" id="11_wwunm"]
+[ext_resource type="Texture2D" uid="uid://7r622otf1txx" path="res://prefabs/poder2.png" id="12_0ibcj"]
+[ext_resource type="Texture2D" uid="uid://uprghph44n6i" path="res://prefabs/voltarButton.png" id="12_luty6"]
+[ext_resource type="Texture2D" uid="uid://dte5lmfx51lrg" path="res://prefabs/poder3.png" id="13_1fdrg"]
+[ext_resource type="Texture2D" uid="uid://bixx1tl4gx5tr" path="res://prefabs/poder4.png" id="14_qect5"]
+
+[node name="loja-cenarios" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_037yi")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 30
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_4vba8")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 30
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_sbmhr")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("4_rculp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
+
+[node name="aba_poderes" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_ir03e")
+
+[node name="aba_cenarios" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_0ibcj")
+
+[node name="aba_moedas" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_1fdrg")
+
+[node name="aba_diamantes" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("8_qect5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("9_d4i3e")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="item1" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_lfpgl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1"]
+layout_mode = 0
+offset_right = 155.0
+offset_bottom = 145.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_ir03e")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Poder 1
+Descrição do poder
+"
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "1500 "
+
+[node name="item2" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_lfpgl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2"]
+layout_mode = 0
+offset_right = 155.0
+offset_bottom = 145.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_0ibcj")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Poder 2
+Descrição do poder
+"
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "1200
+"
+
+[node name="item3" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_lfpgl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3"]
+layout_mode = 0
+offset_right = 155.0
+offset_bottom = 145.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_1fdrg")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Poder 3
+Descrição do poder
+"
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "1300"
+
+[node name="item4" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_lfpgl")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4"]
+layout_mode = 0
+offset_right = 155.0
+offset_bottom = 145.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("14_qect5")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Poder 4
+Descrição do poder
+"
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "1500 "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 375
+
+[node name="Perfil_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Perfil"
+
+[node name="Loja_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Loja
+"
+
+[node name="Comecar_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Começar
+"
+
+[node name="sair_btn" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("11_wwunm")
+
+[node name="voltar_btn" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+texture_normal = ExtResource("12_luty6")
