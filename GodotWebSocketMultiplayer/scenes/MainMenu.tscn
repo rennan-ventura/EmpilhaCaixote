@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5kx650vy0fbq"]
+
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_0ykhv"]
+[ext_resource type="Texture2D" uid="uid://c25oo1c546hyj" path="res://assets/logo.svg" id="2_2wh52"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ykhv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(1.0000153, -37.999992)
+scale = Vector2(0.17889905, 0.17889908)
+texture = ExtResource("2_2wh52")

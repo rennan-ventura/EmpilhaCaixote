@@ -1,0 +1,88 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://57jj5eghe28h"]
+
+[ext_resource type="FontFile" uid="uid://mmvf5m7lptym" path="res://assets/VCR_OSD_MONO_1.001.ttf" id="1_c6ne4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjmcm"]
+bg_color = Color(0.47397572, 0.47397572, 0.47397572, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc3vu"]
+bg_color = Color(0.47397572, 0.47397572, 0.47397572, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhrhb"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.627451, 0.627451, 0.627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(0, 0, 0, 0.6627451)
+shadow_size = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuqlr"]
+bg_color = Color(0.47397572, 0.47397572, 0.47397572, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.7019608)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_size = 4
+
+[resource]
+default_font_size = 10
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(0.9490196, 0.9490196, 0.19215687, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+Button/fonts/font = ExtResource("1_c6ne4")
+Button/icons/icon = null
+Button/styles/focus = SubResource("StyleBoxFlat_pjmcm")
+Button/styles/hover = SubResource("StyleBoxFlat_uc3vu")
+Button/styles/normal = SubResource("StyleBoxFlat_jhrhb")
+Button/styles/pressed = SubResource("StyleBoxFlat_kuqlr")

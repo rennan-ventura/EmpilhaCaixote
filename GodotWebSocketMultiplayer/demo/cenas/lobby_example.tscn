@@ -1,18 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3pil7ks0jcdu"]
+[gd_scene load_steps=6 format=3 uid="uid://b3pil7ks0jcdu"]
 
-[ext_resource type="Script" uid="uid://bmw1nje5imhnc" path="res://demo/scripts/lobby_example.gd" id="1_8eg6v"]
+[ext_resource type="Script" uid="uid://thryp4koiqnx" path="res://demo/scripts/lobby_example.gd" id="1_8eg6v"]
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="2_yx0vw"]
+[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="3_oy5dx"]
+
+[sub_resource type="Theme" id="Theme_oy5dx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vaqyl"]
-font_size = 35
+font_size = 40
+outline_size = 5
+outline_color = Color(1, 1, 1, 0.69803923)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.77254903)
 
 [node name="lobby_example" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 12.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8eg6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(600.93756, 350.40622)
+scale = Vector2(3.339236, 3.8843753)
+texture = ExtResource("2_yx0vw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(3.0133972, 0.9251919)
+scale = Vector2(0.9313809, 1.0555791)
+texture = ExtResource("3_oy5dx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -30,6 +50,7 @@ grow_vertical = 2
 
 [node name="CreateRoomButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_oy5dx")
 theme_override_font_sizes/font_size = 35
 text = "Criar Sala"
 

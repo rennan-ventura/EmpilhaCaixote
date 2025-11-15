@@ -1,9 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhmhhldjwx2ao"]
 
-[ext_resource type="Script" uid="uid://dagtvvevlfoeh" path="res://cenario.gd" id="1_g3h26"]
-[ext_resource type="Script" uid="uid://cvrwkddkbejq6" path="res://demo/cenas/player_container.gd" id="2_fqljg"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_po0nb"]
+[ext_resource type="Script" uid="uid://nexo1j8js7jp" path="res://cenario.gd" id="1_g3h26"]
+[ext_resource type="Script" uid="uid://cq5d5064lbcb6" path="res://demo/cenas/player_container.gd" id="2_fqljg"]
+[ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="2_xwuul"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qijgh"]
 distance = -324.0
@@ -11,10 +10,10 @@ distance = -324.0
 [node name="cenario" type="Node2D"]
 script = ExtResource("1_g3h26")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.78039217, 0.78431374, 0.79607844, 0.27450982)
-scale = Vector2(1152, 648)
-texture = SubResource("CanvasTexture_po0nb")
+[node name="Fundo" type="Sprite2D" parent="."]
+position = Vector2(-0.87185717, 1.0768878)
+scale = Vector2(-1.1702231, 1.223043)
+texture = ExtResource("2_xwuul")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
