@@ -111,10 +111,15 @@ const playerlist = {
     }
 };
 
-const BOX_SIZE = 128;
+const BOX_SIZE = 64;
 const COLS = 7;
 const ROWS = 6;
-let board = Array.from({ length: ROWS }, () => Array(COLS).fill(" "));
+
+function create_board() {
+    return Array.from({ length: ROWS }, () => Array(COLS).fill(" "));
+}
+
+let board = create_board();
 
 function addPiece(board, col, piece) {
     for (let row = board.length - 1; row >= 0; row--) {
@@ -407,6 +412,7 @@ wss.on("connection", (socket) => {
             if (Object.keys(room.players).length === 0) {
                 rooms.delete(socket.roomId);
                 console.log(`Sala ${socket.roomId} vazia e removida.`);
+                board = create_board();
             }
         }
     });

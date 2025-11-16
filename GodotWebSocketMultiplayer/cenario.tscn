@@ -11,17 +11,20 @@ distance = -324.0
 script = ExtResource("1_g3h26")
 
 [node name="Fundo" type="Sprite2D" parent="."]
-position = Vector2(-0.87185717, 1.0768878)
-scale = Vector2(-1.1702231, 1.223043)
+position = Vector2(600.61835, 351.96844)
+scale = Vector2(-1.1730827, 1.2255849)
 texture = ExtResource("2_xwuul")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(603.1543, 351.23642)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 physics_interpolation_mode = 2
 shape = SubResource("WorldBoundaryShape2D_qijgh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(603.1543, 351.23642)
 
 [node name="PlayerContainer" type="Node2D" parent="."]
+position = Vector2(603.1543, 351.23642)
 script = ExtResource("2_fqljg")
