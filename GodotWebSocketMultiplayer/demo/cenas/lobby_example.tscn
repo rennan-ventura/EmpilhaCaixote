@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b3pil7ks0jcdu"]
 
 [ext_resource type="Script" uid="uid://thryp4koiqnx" path="res://demo/scripts/lobby_example.gd" id="1_8eg6v"]
-[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="2_yx0vw"]
-[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="3_oy5dx"]
+[ext_resource type="Texture2D" uid="uid://dqqw4qvc1khwy" path="res://assets/fundos/menu.png" id="2_yx0vw"]
+[ext_resource type="Texture2D" uid="uid://wtceswfbcnkq" path="res://assets/retanguloTras.png" id="3_oy5dx"]
 
 [sub_resource type="Theme" id="Theme_oy5dx"]
 

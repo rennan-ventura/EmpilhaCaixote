@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhmhhldjwx2ao"]
 
-[ext_resource type="Script" uid="uid://nexo1j8js7jp" path="res://cenario.gd" id="1_g3h26"]
+[ext_resource type="Script" uid="uid://ca8y4xe06jet5" path="res://cenario.gd" id="1_g3h26"]
 [ext_resource type="Script" uid="uid://cq5d5064lbcb6" path="res://demo/cenas/player_container.gd" id="2_fqljg"]
-[ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="2_xwuul"]
+[ext_resource type="Texture2D" uid="uid://dy7plk5yu6kfa" path="res://assets/fundos/fundo.png" id="2_xwuul"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qijgh"]
 distance = -324.0
@@ -28,3 +28,13 @@ position = Vector2(603.1543, 351.23642)
 [node name="PlayerContainer" type="Node2D" parent="."]
 position = Vector2(603.1543, 351.23642)
 script = ExtResource("2_fqljg")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 90.0
+offset_top = 609.0
+offset_right = 196.0
+offset_bottom = 640.0
+text = "Limpar linha
+"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

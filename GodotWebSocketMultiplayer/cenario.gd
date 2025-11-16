@@ -10,6 +10,8 @@ var columns = 6
 var left_offset = (screen_width - (columns * box_width)) / 2
 var right_offset = left_offset + columns * box_width
 
+var board_visual = []  
+
 var can_drop = true
 var server_handle
 @export var box: PackedScene = preload("res://box.tscn")
@@ -74,3 +76,8 @@ func _unhandled_input(event):
 				
 func _on_box_drop(data):
 	_spawn_box(data["x"]["pos_x"], data["z"])
+
+func _on_button_pressed() -> void:
+	server_handle.send_message("clear_bottom_line", {})
+	
+# Recebe mensagens do servidor
