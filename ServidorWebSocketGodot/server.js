@@ -3,6 +3,13 @@
 // Criado pelo Zee GameDev lindo de mãe
 // ========================
 
+// Mapa: roomId -> { playerUuid: { timer, timeLeft } }
+const turnTimers = new Map();
+const blockedColumns = new Map();
+
+// Tempo máximo por turno
+const TURN_TIME_MAX = 15;
+
 let otherColor = "";
 
 // Importa as dependências
@@ -109,6 +116,7 @@ const playerlist = {
 		if (player) {
 			player.t = !player.t;
 		}
+		startPlayerTurn(player.room, uuid);
 	},
 };
 
@@ -195,13 +203,134 @@ function checkWin(board, piece) {
 }
 
 //==========================================
+// Turnos e temporizadores
+//==========================================
+
+//Turno do jogador: inicia o timer
+function startPlayerTurn(roomId, playerUuid) {
+	// Cancela timers antigos se houver
+	if (turnTimers.has(roomId) && turnTimers.get(roomId)[playerUuid]?.timer) {
+		clearTimeout(turnTimers.get(roomId)[playerUuid].timer);
+	}
+	// Inicia tempo do jogador
+	if (!turnTimers.has(roomId)) turnTimers.set(roomId, {});
+	turnTimers.get(roomId)[playerUuid] = {
+		timeLeft: TURN_TIME_MAX,
+		timer: setTimeout(() => {
+			// Tempo acabou, notifica a sala/jogador
+			onPlayerTurnTimeout(roomId, playerUuid);
+		}, TURN_TIME_MAX * 1000),
+	};
+
+	// Notifica os jogadores do tempo atual
+	sendTimeUpdate(roomId, playerUuid, TURN_TIME_MAX);
+}
+
+function sendTimeUpdate(roomId, playerUuid, timeLeft) {
+	const room = rooms.get(roomId);
+	if (room) {
+		for (const clientUuid in room.players) {
+			room.players[clientUuid].send(
+				JSON.stringify({
+					cmd: "turn_time_update",
+					content: {
+						uuid: playerUuid,
+						timeLeft: timeLeft,
+					},
+				})
+			);
+		}
+	}
+}
+
+function onPlayerTurnTimeout(roomId, playerUuid) {
+	// Notifica todos os jogadores que o tempo do playerUuid acabou
+	const room = rooms.get(roomId);
+	if (room) {
+		for (const clientUuid in room.players) {
+			room.players[clientUuid].send(
+				JSON.stringify({
+					cmd: "turn_timeout",
+					content: { uuid: playerUuid },
+				})
+			);
+		}
+	}
+	players.changeTurn(playerUuid);
+}
+
+//==========================================
 //Poderes
 //==========================================
+
+//Limpar a ultima linha do tabuleiro
 function clearLastLine(board) {
 	return [
 		Array(7).fill(" "), // Nova linha vazia no topo
 		...board.slice(0, 5), // Linhas 0-4 agora ocupam as posições 1-5
 	];
+}
+
+//Eliminar uma caixa específica
+function eliminateBox(board) {
+	const row = Math.floor(Math.random() * ROWS);
+	const col = Math.floor(Math.random() * COLS);
+	// Verifica se a posição existe e se há uma peça
+	if (row < 0 || row >= board.length || col < 0 || col >= board[0].length)
+		return false;
+	if (board[row][col] === " ") return false; // Sem peça para eliminar
+
+	// Elimina a peça no local indicado
+	for (let r = row; r > 0; r--) {
+		// Todas as peças acima descem uma linha
+		board[r][col] = board[r - 1][col];
+	}
+	// O topo (linha 0) vira vazio
+	board[0][col] = " ";
+	return board;
+}
+
+//Diminuir o tempo do oponente
+function reduceOpponentTime(roomId, opponentUuid) {
+	if (!turnTimers.has(roomId) || !turnTimers.get(roomId)[opponentUuid])
+		return;
+
+	// Reduz o tempo pela metade
+	const old = turnTimers.get(roomId)[opponentUuid];
+
+	// Cancela timer antigo
+	if (old.timer) clearTimeout(old.timer);
+
+	// Atualiza tempo
+	old.timeLeft = Math.floor(old.timeLeft / 2);
+	if (old.timeLeft <= 0) {
+		onPlayerTurnTimeout(roomId, opponentUuid);
+		return;
+	}
+
+	// Recria timer com novo tempo restant
+	old.timer = setTimeout(() => {
+		onPlayerTurnTimeout(roomId, opponentUuid);
+	}, old.timeLeft * 1000);
+
+	// Atualiza no mapa e avisa todos jogadores
+	turnTimers.get(roomId)[opponentUuid] = old;
+	sendTimeUpdate(roomId, opponentUuid, old.timeLeft);
+}
+
+//Bloqueia uma coluna específica
+function blockColumn(roomId, col) {
+	if (!blockedColumns.has(roomId)) {
+		blockedColumns.set(roomId, new Set());
+	}
+	blockedColumns.get(roomId).add(col);
+}
+
+//Desbloqueia uma coluna específica
+function unblockColumn(roomId, col) {
+	if (blockedColumns.has(roomId)) {
+		blockedColumns.get(roomId).delete(col);
+	}
 }
 
 //==========================================
@@ -244,6 +373,20 @@ wss.on("connection", (socket) => {
 				console.log("Column", data.content);
 				const px = Math.floor(data.content.pos_x / BOX_SIZE);
 				console.log("Coluna", px);
+
+				// Impede se a coluna estiver bloqueada
+				if (
+					blockedColumns.has(socket.roomId) &&
+					blockedColumns.get(socket.roomId).has(px)
+				) {
+					socket.send(
+						JSON.stringify({
+							cmd: "column_blocked",
+							content: { col: px },
+						})
+					);
+					break; // Impede jogada!
+				}
 
 				const box_info = { x: data.content, z: requestingplayer.z };
 				if (room) {
@@ -362,9 +505,8 @@ wss.on("connection", (socket) => {
 					}
 				}
 
-				// Quando há 2 ou mais jogadores na sala, começa o jogo
-				// Troque o "length >= 2" pelo número de jogadores que você quer na sala
-				if (Object.keys(roomToJoin.players).length >= 2) {
+				// Quando há 2 jogadores na sala, começa o jogo
+				if (Object.keys(roomToJoin.players).length === 2) {
 					console.log(
 						`Sala ${socket.roomId} atingiu o número de jogadores. Começando o jogo!`
 					);
@@ -433,6 +575,7 @@ wss.on("connection", (socket) => {
 				break;
 			}
 			case "clear_bottom_line": {
+				// Limpa a última linha do tabuleiro
 				board = clearLastLine(board);
 				const room = rooms.get(socket.roomId);
 				if (room) {
@@ -447,15 +590,47 @@ wss.on("connection", (socket) => {
 							);
 						}
 					}
+					printBoard(board);
 				}
+				break;
+			}
+			case "eliminate_box": {
+				// Elimina uma caixa aleatória do tabuleiro
+				board = eliminateBox(board);
+				const room = rooms.get(socket.roomId);
+				if (room) {
+					for (const clientUuid in room.players) {
+						const client = room.players[clientUuid];
+						if (client.readyState === WebSocket.OPEN) {
+							client.send(
+								JSON.stringify({
+									cmd: "box_eliminated",
+									content: { newBoard: board },
+								})
+							);
+						}
+					}
+					printBoard(board);
+				}
+				break;
+			}
+			case "reduce_opponent_time": {
+				// Reduz o tempo do oponente pela metade
+				reduceOpponentTime(socket.roomId, data.content.targetUuid);
+				break;
+			}
+			case "block_column": {
+				// Bloqueia uma coluna específica
+				const col = data.content.col; // Coluna recebida do cliente/poder
+				blockColumn(socket.roomId, col);
 				break;
 			}
 		}
 	});
 
-	// ========================================
+	//========================================
 	// Evento disparado quando o cliente desconecta
-	// ========================================
+	//========================================
 	socket.on("close", () => {
 		console.log(`Cliente desconectado: ${uuid}`);
 
