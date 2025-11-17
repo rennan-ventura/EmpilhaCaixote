@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf7qob13loihq"]
+[gd_scene load_steps=6 format=3 uid="uid://cf7qob13loihq"]
 
 [ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_ouk20"]
 [ext_resource type="Texture2D" uid="uid://bppboxlp5t5ua" path="res://assets/title.png" id="2_axi1q"]
 [ext_resource type="Theme" uid="uid://57jj5eghe28h" path="res://assets/Button_Theme.tres" id="3_mae5d"]
+[ext_resource type="Texture2D" uid="uid://cx1dwb4b0ug24" path="res://assets/sair.png" id="4_ytr4m"]
+[ext_resource type="Texture2D" uid="uid://5vlpvbxt7nv4" path="res://assets/usuario 1.png" id="5_l48gv"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -26,9 +28,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
@@ -79,3 +81,8 @@ text = "PERFIL
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+texture_normal = ExtResource("4_ytr4m")
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_l48gv")
