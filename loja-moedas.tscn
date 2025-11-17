@@ -1,20 +1,23 @@
-[gd_scene load_steps=16 format=3 uid="uid://cr5psj0n6j3hi"]
+[gd_scene load_steps=19 format=3 uid="uid://cr5psj0n6j3hi"]
 
 [ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_2u2xq"]
+[ext_resource type="Script" uid="uid://d17en4j0kba7t" path="res://loja_moedas.gd" id="1_xho34"]
 [ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="2_3lkax"]
 [ext_resource type="Texture2D" uid="uid://ddcukdvh3hq4j" path="res://assets/retanguloFrente.png" id="3_o2a5f"]
 [ext_resource type="Texture2D" uid="uid://81p08oflwakn" path="res://assets/LOJA.png" id="4_gm81p"]
 [ext_resource type="Texture2D" uid="uid://ci4jx078bx5bi" path="res://assets/aba.png" id="5_quoak"]
 [ext_resource type="Texture2D" uid="uid://l62j4hakeqsv" path="res://assets/aba_press.png" id="6_xho34"]
 [ext_resource type="Texture2D" uid="uid://cj61s1u31p56a" path="res://assets/retanguloMeio.png" id="9_4yg1j"]
-[ext_resource type="Texture2D" uid="uid://dikp638dclr5p" path="res://assets/moeda1.png" id="9_ftd3m"]
+[ext_resource type="Texture2D" uid="uid://bxyik86p7biuk" path="res://assets/moeda1.png" id="9_ftd3m"]
 [ext_resource type="Texture2D" uid="uid://bdemxnk62lx5k" path="res://assets/diamanteIcon.png" id="10_l4mbu"]
 [ext_resource type="Texture2D" uid="uid://mycyh2vv7fng" path="res://assets/retanguloItem.png" id="10_nlk2g"]
-[ext_resource type="Texture2D" uid="uid://oufb3wugajms" path="res://assets/moeda2.png" id="11_tmqhe"]
-[ext_resource type="Texture2D" uid="uid://scdpikpyiyix" path="res://assets/moeda3.png" id="12_cx7tm"]
-[ext_resource type="Texture2D" uid="uid://brtkmmn1wxl2n" path="res://assets/moeda4.png" id="13_hmj06"]
+[ext_resource type="Texture2D" uid="uid://db1exehk54u20" path="res://assets/moeda2.png" id="11_tmqhe"]
+[ext_resource type="Texture2D" uid="uid://0eqv6o3trd8d" path="res://assets/moeda3.png" id="12_cx7tm"]
+[ext_resource type="Texture2D" uid="uid://my4huxja4e31" path="res://assets/moeda4.png" id="13_hmj06"]
 [ext_resource type="Texture2D" uid="uid://cx1dwb4b0ug24" path="res://assets/sair.png" id="14_0v4o3"]
+[ext_resource type="Theme" uid="uid://shsbaaluk1ft" path="res://botaoazulcerto.tres" id="14_quoak"]
 [ext_resource type="Texture2D" uid="uid://hle4jmqyv4bh" path="res://assets/voltar.png" id="15_shxss"]
+[ext_resource type="Texture2D" uid="uid://bvpj08c8k5vkt" path="res://assets/moedaIcon.png" id="18_ftd3m"]
 
 [node name="loja-moedas" type="Control"]
 layout_mode = 3
@@ -23,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xho34")
 
 [node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
@@ -198,7 +202,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 5
 text = "100 Moedas"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+[node name="moeda1_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 2
@@ -233,7 +237,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 5
 text = "500 Moedas"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+[node name="moeda2_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 2
@@ -268,7 +272,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 5
 text = "2000 Moedas"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+[node name="moeda3_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 2
@@ -304,7 +308,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 5
 text = "10000 Moedas"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+[node name="moeda4_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 2
@@ -314,21 +318,12 @@ icon = ExtResource("10_l4mbu")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 58
-
-[node name="Perfil_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 9
-text = "Perfil"
-
-[node name="Loja_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 9
-text = "Loja
-"
+size_flags_horizontal = 8
+theme_override_constants/separation = 150
 
 [node name="Comecar_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("14_quoak")
 theme_override_font_sizes/font_size = 9
 text = "Começar
 "
@@ -343,3 +338,51 @@ texture_normal = ExtResource("14_0v4o3")
 [node name="voltar_btn" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer"]
 layout_mode = 2
 texture_normal = ExtResource("15_shxss")
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 70
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("18_ftd3m")
+
+[node name="LabelMoedas" type="Label" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_l4mbu")
+
+[node name="LabelDiamantes" type="Label" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_poderes" to="." method="_on_aba_poderes_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_cenarios" to="." method="_on_aba_cenarios_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_diamantes" to="." method="_on_aba_diamantes_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer/moeda1_btn" to="." method="_on_moeda_1_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer/moeda2_btn" to="." method="_on_moeda_2_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer/moeda3_btn" to="." method="_on_moeda_3_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer/moeda4_btn" to="." method="_on_moeda_4_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/sair_btn" to="." method="_on_sair_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/voltar_btn" to="." method="_on_voltar_btn_pressed"]

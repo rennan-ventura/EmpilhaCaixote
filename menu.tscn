@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf7qob13loihq"]
+[gd_scene load_steps=7 format=3 uid="uid://cf7qob13loihq"]
 
+[ext_resource type="Script" uid="uid://b7gsb811bn6if" path="res://menu.gd" id="1_l48gv"]
 [ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_ouk20"]
 [ext_resource type="Texture2D" uid="uid://bppboxlp5t5ua" path="res://assets/title.png" id="2_axi1q"]
 [ext_resource type="Theme" uid="uid://57jj5eghe28h" path="res://assets/Button_Theme.tres" id="3_mae5d"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_l48gv")
 
 [node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
@@ -69,20 +71,16 @@ size_flags_vertical = 4
 theme = ExtResource("3_mae5d")
 text = "LOJA"
 
-[node name="perfil_btn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("3_mae5d")
-text = "PERFIL
-"
-
-[node name="TextureButton" type="TextureButton" parent="MarginContainer"]
+[node name="sair_btn" type="TextureButton" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 texture_normal = ExtResource("4_ytr4m")
 
-[node name="TextureButton2" type="TextureButton" parent="MarginContainer"]
+[node name="user_btn" type="TextureButton" parent="MarginContainer"]
 layout_mode = 2
 texture_normal = ExtResource("5_l48gv")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/store_btn" to="." method="_on_store_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/sair_btn" to="." method="_on_sair_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/user_btn" to="." method="_on_user_btn_pressed"]
