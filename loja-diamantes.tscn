@@ -1,21 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://dkmekv3bjus1j"]
+[gd_scene load_steps=15 format=3 uid="uid://cd1d60vim6uue"]
 
-[ext_resource type="Texture2D" uid="uid://bf5w6hm11mtdc" path="res://prefabs/backgound.png" id="1_aq3w4"]
-[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://prefabs/retanguloTras.png" id="2_s1i4n"]
-[ext_resource type="Texture2D" uid="uid://ddcukdvh3hq4j" path="res://prefabs/retanguloFrente.png" id="3_hjgqp"]
-[ext_resource type="Texture2D" uid="uid://81p08oflwakn" path="res://prefabs/LOJA.png" id="4_pl8hc"]
-[ext_resource type="Texture2D" uid="uid://c8cshibv4x1np" path="res://prefabs/poderes.png" id="5_aqgub"]
-[ext_resource type="Texture2D" uid="uid://d38dv4vmvlm5f" path="res://prefabs/cenarios.png" id="6_ei6d6"]
-[ext_resource type="Texture2D" uid="uid://dvwigfyhxsu2h" path="res://prefabs/moedas.png" id="7_caelh"]
-[ext_resource type="Texture2D" uid="uid://i2a18q6x2cle" path="res://prefabs/diamantes.png" id="8_878ng"]
-[ext_resource type="Texture2D" uid="uid://cj61s1u31p56a" path="res://prefabs/retanguloMeio.png" id="9_jwd73"]
-[ext_resource type="Texture2D" uid="uid://mycyh2vv7fng" path="res://prefabs/retanguloItem.png" id="10_8bkx7"]
-[ext_resource type="Texture2D" uid="uid://cf5krnmwqvp8h" path="res://prefabs/excluir.png" id="11_3a6l4"]
-[ext_resource type="Texture2D" uid="uid://djg8jhi80ggox" path="res://prefabs/poder1.png" id="11_aqgub"]
-[ext_resource type="Texture2D" uid="uid://uprghph44n6i" path="res://prefabs/voltarButton.png" id="12_bx2mo"]
-[ext_resource type="Texture2D" uid="uid://7r622otf1txx" path="res://prefabs/poder2.png" id="12_ei6d6"]
-[ext_resource type="Texture2D" uid="uid://dte5lmfx51lrg" path="res://prefabs/poder3.png" id="13_caelh"]
-[ext_resource type="Texture2D" uid="uid://bixx1tl4gx5tr" path="res://prefabs/poder4.png" id="14_878ng"]
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_jt67y"]
+[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="2_s1i4n"]
+[ext_resource type="Texture2D" uid="uid://ddcukdvh3hq4j" path="res://assets/retanguloFrente.png" id="3_hjgqp"]
+[ext_resource type="Texture2D" uid="uid://81p08oflwakn" path="res://assets/LOJA.png" id="4_pl8hc"]
+[ext_resource type="Texture2D" uid="uid://ci4jx078bx5bi" path="res://assets/aba.png" id="5_3s7gu"]
+[ext_resource type="Texture2D" uid="uid://l62j4hakeqsv" path="res://assets/aba_press.png" id="6_sk4rm"]
+[ext_resource type="Texture2D" uid="uid://c4c57xk3uydkf" path="res://assets/diamante1.png" id="9_23tpf"]
+[ext_resource type="Texture2D" uid="uid://cj61s1u31p56a" path="res://assets/retanguloMeio.png" id="9_jwd73"]
+[ext_resource type="Texture2D" uid="uid://mycyh2vv7fng" path="res://assets/retanguloItem.png" id="10_8bkx7"]
+[ext_resource type="Texture2D" uid="uid://dydscb8c85gj0" path="res://assets/diamante2.png" id="10_yp5oe"]
+[ext_resource type="Texture2D" uid="uid://ckvajpknlsg3x" path="res://assets/diamante3.png" id="11_jt67y"]
+[ext_resource type="Texture2D" uid="uid://bmw4pkjg148hm" path="res://assets/diamante4.png" id="12_3s7gu"]
+[ext_resource type="Texture2D" uid="uid://cx1dwb4b0ug24" path="res://assets/sair.png" id="14_gse5o"]
+[ext_resource type="Texture2D" uid="uid://hle4jmqyv4bh" path="res://assets/voltar.png" id="15_f2i6t"]
 
 [node name="loja-diamantes" type="Control"]
 layout_mode = 3
@@ -27,9 +25,9 @@ grow_vertical = 2
 
 [node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-texture = ExtResource("1_aq3w4")
+offset_right = 360.0
+offset_bottom = 180.0
+texture = ExtResource("1_jt67y")
 expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -37,12 +35,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -14.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
@@ -51,10 +50,10 @@ expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
@@ -63,194 +62,269 @@ expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("4_pl8hc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
 
 [node name="aba_poderes" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("5_aqgub")
+texture_normal = ExtResource("5_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_poderes"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 0.5
+offset_right = 56.0
+offset_bottom = 13.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Poderes"
+horizontal_alignment = 1
 
 [node name="aba_cenarios" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("6_ei6d6")
+texture_normal = ExtResource("5_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_cenarios"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Cenários"
+horizontal_alignment = 1
 
 [node name="aba_moedas" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("7_caelh")
+texture_normal = ExtResource("5_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_moedas"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Moedas"
+horizontal_alignment = 1
 
 [node name="aba_diamantes" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-texture_normal = ExtResource("8_878ng")
+texture_normal = ExtResource("6_sk4rm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_diamantes"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.30588236, 0.42352942, 0.6784314, 1)
+theme_override_font_sizes/font_size = 9
+text = "Diamantes"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("9_jwd73")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 30
+offset_top = 0.5
+offset_right = 217.0
+offset_bottom = 80.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 0
 
-[node name="item1" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+[node name="item1" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_8bkx7")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1"]
 layout_mode = 0
-offset_right = 155.0
-offset_bottom = 145.0
-theme_override_constants/margin_left = 15
+offset_left = 8.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("11_aqgub")
+texture = ExtResource("9_23tpf")
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Poder 1
-Descrição do poder
-"
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "10 Diamantes"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "1500 "
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$5,00"
 
-[node name="item2" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+[node name="item2" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_8bkx7")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2"]
 layout_mode = 0
-offset_right = 155.0
-offset_bottom = 145.0
-theme_override_constants/margin_left = 15
+offset_left = 7.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("12_ei6d6")
+texture = ExtResource("10_yp5oe")
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Poder 2
-Descrição do poder
-"
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "30 Diamantes"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "1200
-"
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$10,00"
 
-[node name="item3" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+[node name="item3" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_8bkx7")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3"]
 layout_mode = 0
-offset_right = 155.0
-offset_bottom = 145.0
-theme_override_constants/margin_left = 15
+offset_left = 8.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("13_caelh")
+texture = ExtResource("11_jt67y")
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Poder 3
-Descrição do poder
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "100 Diamantes"
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$30,00
 "
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "1300"
-
-[node name="item4" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer"]
+[node name="item4" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("10_8bkx7")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4"]
 layout_mode = 0
-offset_right = 155.0
-offset_bottom = 145.0
-theme_override_constants/margin_left = 15
+offset_left = 8.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("14_878ng")
+texture = ExtResource("12_3s7gu")
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Poder 4
-Descrição do poder
-"
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "300 Diamantes"
 
-[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "1500 "
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$70,00"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 375
+theme_override_constants/separation = 58
 
 [node name="Perfil_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 9
 text = "Perfil"
 
 [node name="Loja_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 9
 text = "Loja
 "
 
 [node name="Comecar_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 9
 text = "Começar
 "
 
@@ -258,8 +332,9 @@ text = "Começar
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-texture_normal = ExtResource("11_3a6l4")
+toggle_mode = true
+texture_normal = ExtResource("14_gse5o")
 
 [node name="voltar_btn" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer"]
 layout_mode = 2
-texture_normal = ExtResource("12_bx2mo")
+texture_normal = ExtResource("15_f2i6t")

@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dx5w8g52qyf4t"]
+[gd_scene load_steps=9 format=3 uid="uid://coqjdqqd3qrja"]
 
-[ext_resource type="Texture2D" uid="uid://bf5w6hm11mtdc" path="res://prefabs/backgound.png" id="1_74nqj"]
-[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://prefabs/retanguloTras.png" id="2_850xo"]
-[ext_resource type="Texture2D" uid="uid://cf5krnmwqvp8h" path="res://prefabs/excluir.png" id="3_om43o"]
-[ext_resource type="Texture2D" uid="uid://bhpk5dt8u4gbe" path="res://prefabs/login-retan.png" id="4_rpiew"]
-[ext_resource type="Texture2D" uid="uid://cddflicnmi0gc" path="res://prefabs/login-title.png" id="5_ajwsk"]
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_ma4wh"]
+[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="2_850xo"]
+[ext_resource type="Texture2D" uid="uid://cx1dwb4b0ug24" path="res://assets/sair.png" id="3_0s12h"]
+[ext_resource type="Theme" uid="uid://cmg7ryylk4hye" path="res://LABEL.tres" id="4_6hqeh"]
+[ext_resource type="Texture2D" uid="uid://bhpk5dt8u4gbe" path="res://assets/login-retan.png" id="4_rpiew"]
+[ext_resource type="Theme" uid="uid://shsbaaluk1ft" path="res://botaoazulcerto.tres" id="5_edd8a"]
+[ext_resource type="StyleBox" uid="uid://cw1g0k60fs3n0" path="res://dentrodalabel.tres" id="5_eqty5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eqty5"]
+load_path = "res://.godot/imported/login-title.png-2394e75f7021f33b8418a6be0a898601.ctex"
 
 [node name="Login" type="Control"]
 layout_mode = 3
@@ -16,11 +21,9 @@ grow_vertical = 2
 
 [node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 87.0
-offset_top = 55.0
-offset_right = 1050.0
-offset_bottom = 598.0
-texture = ExtResource("1_74nqj")
+offset_right = 360.0
+offset_bottom = 180.0
+texture = ExtResource("1_ma4wh")
 expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -28,16 +31,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 87.0
-offset_top = 66.0
-offset_right = -82.0
-offset_bottom = -57.0
+offset_left = 34.0
+offset_right = -20.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 100
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 100
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
@@ -46,70 +48,90 @@ expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 
 [node name="TextureButton" type="TextureButton" parent="MarginContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-texture_normal = ExtResource("3_om43o")
+texture_normal = ExtResource("3_0s12h")
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 220
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 220
-theme_override_constants/margin_bottom = 20
+size_flags_horizontal = 4
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 10
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer2"]
 layout_mode = 2
 texture = ExtResource("4_rpiew")
-expand_mode = 1
+expand_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer2"]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = -40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = -40
+theme_override_constants/margin_bottom = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "LOGIN"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("5_ajwsk")
+texture = SubResource("CompressedTexture2D_eqty5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_6hqeh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "USUÁRIO"
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "Usuário"
-
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer"]
-layout_mode = 2
+theme_override_constants/caret_width = 1
+theme_override_constants/minimum_character_width = 4
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = ExtResource("5_eqty5")
 placeholder_text = "Username"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("4_6hqeh")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "SENHA"
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer2/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 21
-text = "Senha"
-
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = ExtResource("5_eqty5")
 placeholder_text = "***********"
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2"]
@@ -121,8 +143,12 @@ theme_override_constants/separation = 220
 
 [node name="voltar_btn" type="Button" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Voltar"
+theme = ExtResource("5_edd8a")
+theme_override_font_sizes/font_size = 8
+text = "VOLTAR"
 
 [node name="cadastrar_btn" type="Button" parent="MarginContainer/MarginContainer2/MarginContainer/VBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Cadastrar"
+theme = ExtResource("5_edd8a")
+theme_override_font_sizes/font_size = 8
+text = "ENTRAR"

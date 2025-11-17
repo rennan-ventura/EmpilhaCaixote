@@ -1,0 +1,69 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://shsbaaluk1ft"]
+
+[ext_resource type="FontFile" uid="uid://mmvf5m7lptym" path="res://assets/VCR_OSD_MONO_1.001.ttf" id="1_6n6ke"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqjb7"]
+bg_color = Color(0.17958224, 0.40362656, 0.982101, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0widr"]
+bg_color = Color(0.18039216, 0.40392157, 0.98039216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4so0t"]
+bg_color = Color(0.36428204, 0.34243175, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wt43o"]
+bg_color = Color(0.18039216, 0.40392157, 0.98039216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2es7"]
+bg_color = Color(0.18039216, 0.40392157, 0.98039216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[resource]
+Button/font_sizes/font_size = 21
+Button/fonts/font = ExtResource("1_6n6ke")
+Button/styles/disabled = SubResource("StyleBoxFlat_qqjb7")
+Button/styles/focus = SubResource("StyleBoxFlat_0widr")
+Button/styles/hover = SubResource("StyleBoxFlat_4so0t")
+Button/styles/normal = SubResource("StyleBoxFlat_wt43o")
+Button/styles/pressed = SubResource("StyleBoxFlat_k2es7")
