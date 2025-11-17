@@ -78,5 +78,5 @@ func _on_box_drop(data):
 	_spawn_box(data["x"]["pos_x"], data["z"])
 
 func _on_button_pressed() -> void:
-	server_handle.send_message("clear_bottom_line")
+	server_handle.send_message("clear_bottom_line", {})
 	

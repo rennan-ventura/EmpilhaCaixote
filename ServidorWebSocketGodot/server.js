@@ -1,664 +1,777 @@
 // ========================
-// Servidor Multiplayer Simples para Godot
-// Criado pelo Zee GameDev lindo de mãe
+// Servidor Multiplayer para EmpilhaCaixa (Connect Four) - Godot 4.5.1
+// Versão Otimizada com Board por Sala, Timers, Poderes e Bloqueios
 // ========================
 
-// Mapa: roomId -> { playerUuid: { timer, timeLeft } }
-const turnTimers = new Map();
-const blockedColumns = new Map();
+// ========================================
+// MAPAS DE GESTÃO MULTISALA
+// ========================================
+const boards = new Map();           // roomId → board (cada sala tem seu próprio)
+const turnTimers = new Map();       // roomId → { playerUuid: { timer, timeLeft } }
+const blockedColumns = new Map();   // roomId → Set(col) - colunas bloqueadas
+const roomOtherColors = new Map();  // roomId → otherColor (cor do segundo jogador)
 
-// Tempo máximo por turno
-const TURN_TIME_MAX = 15;
+// ========================================
+// DEPENDÊNCIAS
+// ========================================
+const express = require("express");
+const WebSocket = require("ws");
+const { v4: uuidv4 } = require("uuid");
 
-let otherColor = "";
-
-// Importa as dependências
-const express = require("express"); // Framework para criar um servidor HTTP simples
-const WebSocket = require("ws"); // Biblioteca para trabalhar com WebSockets
-const { v4: uuidv4 } = require("uuid"); // Gera IDs únicos para identificar cada jogador
-
-// Cria o app Express e inicia o servidor HTTP
+// ========================================
+// CONFIGURAÇÃO DO SERVIDOR
+// ========================================
 const app = express();
 const PORT = process.env.PORT || 9090;
 const server = app.listen(PORT, () => {
-	console.log(`Servidor iniciado na porta: ${PORT}`);
+    console.log(`✓ Servidor iniciado na porta: ${PORT}`);
 });
-
-// Cria o servidor WebSocket em cima do servidor HTTP
 const wss = new WebSocket.Server({ server });
 
-// "rooms" é um Map que guarda todas as salas criadas
-// cada sala tem um código e a lista de jogadores conectados
-const rooms = new Map();
+// ========================================
+// CONSTANTES
+// ========================================
+const ROWS = 6;
+const COLS = 7;
+const TURN_TIME_MAX = 15;  // 15 segundos por turno
+const BOX_SIZE = 64;
 
-// Função que gera um código aleatório para a sala (ex: 8GJ9Q)
-function generateRoomCode(length = 5) {
-	const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	let result = "";
-	for (let i = 0; i < length; i++)
-		result += chars.charAt(Math.floor(Math.random() * chars.length));
-	return result;
+// ========================================
+// ROOMS E PLAYERS
+// ========================================
+const rooms = new Map();   // roomId → { players: {uuid: socket} }
+
+// ========================================
+// FUNÇÕES DE UTILIDADE - BOARD
+// ========================================
+
+/**
+ * Cria um novo tabuleiro vazio (6x7)
+ */
+function create_board() {
+    return Array.from({ length: ROWS }, () => Array(COLS).fill(" "));
 }
 
-// Lista de jogadores conectados
-// Guarda posição (x,y) e a sala que pertence
+/**
+ * Obtém o board da sala. Se não existir, cria um novo.
+ */
+function getBoardForRoom(roomId) {
+    if (!boards.has(roomId)) {
+        boards.set(roomId, create_board());
+    }
+    return boards.get(roomId);
+}
+
+/**
+ * Limpa todos os dados de uma sala ao removê-la
+ */
+function cleanUpRoom(roomId) {
+    boards.delete(roomId);
+    turnTimers.delete(roomId);
+    blockedColumns.delete(roomId);
+    roomOtherColors.delete(roomId);
+    console.log(`[Cleanup] Sala ${roomId} removida completamente.`);
+}
+
+/**
+ * Adiciona uma peça ao tabuleiro
+ */
+function addPiece(board, col, piece) {
+    if (col < 0 || col >= COLS) return false;
+    for (let row = board.length - 1; row >= 0; row--) {
+        if (board[row][col] === " ") {
+            board[row][col] = piece;
+            return true;
+        }
+    }
+    return false; // Coluna cheia
+}
+
+/**
+ * Imprime o board no console (debug)
+ */
+function printBoard(board) {
+    console.log("\n=== BOARD ===");
+    for (let row of board) {
+        console.log("| " + row.join(" | ") + " |");
+    }
+    console.log("=============\n");
+}
+
+/**
+ * Verifica se há vitória (4 em linha: horizontal, vertical ou diagonal)
+ */
+function checkWin(board, piece) {
+    const rows = board.length;
+    const cols = board[0].length;
+
+    // Horizontal
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c <= cols - 4; c++) {
+            if (board[r][c] === piece && 
+                board[r][c + 1] === piece && 
+                board[r][c + 2] === piece && 
+                board[r][c + 3] === piece) {
+                return true;
+            }
+        }
+    }
+
+    // Vertical
+    for (let c = 0; c < cols; c++) {
+        for (let r = 0; r <= rows - 4; r++) {
+            if (board[r][c] === piece && 
+                board[r + 1][c] === piece && 
+                board[r + 2][c] === piece && 
+                board[r + 3][c] === piece) {
+                return true;
+            }
+        }
+    }
+
+    // Diagonal descendente
+    for (let r = 0; r <= rows - 4; r++) {
+        for (let c = 0; c <= cols - 4; c++) {
+            if (board[r][c] === piece && 
+                board[r + 1][c + 1] === piece && 
+                board[r + 2][c + 2] === piece && 
+                board[r + 3][c + 3] === piece) {
+                return true;
+            }
+        }
+    }
+
+    // Diagonal ascendente
+    for (let r = 3; r < rows; r++) {
+        for (let c = 0; c <= cols - 4; c++) {
+            if (board[r][c] === piece && 
+                board[r - 1][c + 1] === piece && 
+                board[r - 2][c + 2] === piece && 
+                board[r - 3][c + 3] === piece) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+/**
+ * Verifica se há empate (tabuleiro cheio)
+ */
+function checkTie(board) {
+    return board.every(row => row.every(cell => cell !== " "));
+}
+
+// ========================================
+// PLAYERLIST - GESTÃO DE JOGADORES
+// ========================================
 const playerlist = {
-	players: [],
+    players: [],
 
-	getAll: function () {
-		return this.players;
-	},
+    getAll: function () {
+        return this.players;
+    },
 
-	get: function (uuid) {
-		return this.players.find((player) => player.uuid === uuid);
-	},
+    get: function (uuid) {
+        return this.players.find(p => p.uuid === uuid);
+    },
 
-	// Adiciona um novo jogador ao playerlist
-	add: function (uuid, roomCode) {
-		// Descobre se é o primeiro jogador da sala
-		const playersInRoom = this.getByRoom(roomCode);
-		const isFirstPlayer = playersInRoom.length === 0;
+    add: function (uuid, roomCode) {
+        const playersInRoom = this.getByRoom(roomCode);
+        const isFirstPlayer = playersInRoom.length === 0;
+        let turn = false;
+        const colors = ["red", "blue"];
+        const colorIndex = Math.floor(Math.random() * 2);
+        let playerColor = colors[colorIndex];
 
-		let turn = false;
-		const a = Math.floor(Math.random() * 1000) % 2;
-		const colors = ["red", "blue"];
-		let b = "";
-		// Define posição inicial para o jogador
-		// Jogador 1 começa na esquerda, Jogador 2 na direita
-		if (isFirstPlayer) {
-			b = colors[a];
-			otherColor = colors[1 - a];
-		} else {
-			b = otherColor;
-		}
-		if (b == "red") {
-			turn = true;
-		} else {
-			turn = false;
-		}
+        if (isFirstPlayer) {
+            roomOtherColors.set(roomCode, colors[1 - colorIndex]);
+        } else {
+            playerColor = roomOtherColors.get(roomCode);
+            turn = playerColor === "red";
+        }
 
-		let player = {
-			uuid,
-			room: roomCode,
-			x: isFirstPlayer ? 550 : 700,
-			y: 300,
-			z: b,
-			t: turn,
-		};
+        const player = {
+            uuid,
+            room: roomCode,
+            x: isFirstPlayer ? 550 : 700,
+            y: 300,
+            z: playerColor,
+            t: turn
+        };
 
-		this.players.push(player);
-		console.log(player);
-		return player;
-	},
+        this.players.push(player);
+        console.log(`[Player] ${uuid} adicionado à sala ${roomCode} com cor ${playerColor}`);
+        return player;
+    },
 
-	// Atualiza a posição de um jogador específico
-	update: function (uuid, newX, newY) {
-		const player = this.get(uuid);
-		if (player) {
-			player.x = newX;
-			player.y = newY;
-		}
-	},
+    update: function (uuid, newX, newY) {
+        const player = this.get(uuid);
+        if (player) {
+            player.x = newX;
+            player.y = newY;
+        }
+    },
 
-	// Remove jogador da lista quando ele sai
-	remove: function (uuid) {
-		this.players = this.players.filter((player) => player.uuid !== uuid);
-	},
+    remove: function (uuid) {
+        this.players = this.players.filter(p => p.uuid !== uuid);
+    },
 
-	// Retorna todos os jogadores de uma sala específica
-	getByRoom: function (roomCode) {
-		return this.players.filter((player) => player.room === roomCode);
-	},
-
-	// Muda o turno do jogador
-	changeTurn: function (uuid) {
-		const player = this.get(uuid);
-		if (player) {
-			player.t = !player.t;
-		}
-		startPlayerTurn(player.room, uuid);
-	},
+    getByRoom: function (roomCode) {
+        return this.players.filter(p => p.room === roomCode);
+    }
 };
 
-const BOX_SIZE = 64;
-const COLS = 7;
-const ROWS = 6;
-
-function create_board() {
-	return Array.from({ length: ROWS }, () => Array(COLS).fill(" "));
-}
-
-let board = create_board();
-
-function addPiece(board, col, piece) {
-	for (let row = board.length - 1; row >= 0; row--) {
-		if (board[row][col] === " ") {
-			board[row][col] = piece;
-			return true;
-		}
-	}
-	return false; // Column is full
-}
-
-function printBoard(board) {
-	console.log("\n"); //
-	for (let row of board) {
-		console.log("| " + row.join(" | ") + " |");
-	}
-}
-
-function checkWin(board, piece) {
-	const rows = board.length;
-	const cols = board[0].length;
-	for (let r = 0; r < rows; r++) {
-		for (let c = 0; c <= cols - 4; c++) {
-			if (
-				board[r][c] === piece &&
-				board[r][c + 1] === piece &&
-				board[r][c + 2] === piece &&
-				board[r][c + 3] === piece
-			) {
-				return true;
-			}
-		}
-	}
-	for (let c = 0; c < cols; c++) {
-		for (let r = 0; r <= rows - 4; r++) {
-			if (
-				board[r][c] === piece &&
-				board[r + 1][c] === piece &&
-				board[r + 2][c] === piece &&
-				board[r + 3][c] === piece
-			) {
-				return true;
-			}
-		}
-	}
-	for (let r = 0; r <= rows - 4; r++) {
-		for (let c = 0; c <= cols - 4; c++) {
-			if (
-				board[r][c] === piece &&
-				board[r + 1][c + 1] === piece &&
-				board[r + 2][c + 2] === piece &&
-				board[r + 3][c + 3] === piece
-			) {
-				return true;
-			}
-		}
-	}
-	for (let r = 3; r < rows; r++) {
-		for (let c = 0; c <= cols - 4; c++) {
-			if (
-				board[r][c] === piece &&
-				board[r - 1][c + 1] === piece &&
-				board[r - 2][c + 2] === piece &&
-				board[r - 3][c + 3] === piece
-			) {
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-//==========================================
-// Turnos e temporizadores
-//==========================================
-
-//Turno do jogador: inicia o timer
-function startPlayerTurn(roomId, playerUuid) {
-	// Cancela timers antigos se houver
-	if (turnTimers.has(roomId) && turnTimers.get(roomId)[playerUuid]?.timer) {
-		clearTimeout(turnTimers.get(roomId)[playerUuid].timer);
-	}
-	// Inicia tempo do jogador
-	if (!turnTimers.has(roomId)) turnTimers.set(roomId, {});
-	turnTimers.get(roomId)[playerUuid] = {
-		timeLeft: TURN_TIME_MAX,
-		timer: setTimeout(() => {
-			// Tempo acabou, notifica a sala/jogador
-			onPlayerTurnTimeout(roomId, playerUuid);
-		}, TURN_TIME_MAX * 1000),
-	};
-
-	// Notifica os jogadores do tempo atual
-	sendTimeUpdate(roomId, playerUuid, TURN_TIME_MAX);
-}
-
-function sendTimeUpdate(roomId, playerUuid, timeLeft) {
-	const room = rooms.get(roomId);
-	if (room) {
-		for (const clientUuid in room.players) {
-			room.players[clientUuid].send(
-				JSON.stringify({
-					cmd: "turn_time_update",
-					content: {
-						uuid: playerUuid,
-						timeLeft: timeLeft,
-					},
-				})
-			);
-		}
-	}
-}
-
-function onPlayerTurnTimeout(roomId, playerUuid) {
-	// Notifica todos os jogadores que o tempo do playerUuid acabou
-	const room = rooms.get(roomId);
-	if (room) {
-		for (const clientUuid in room.players) {
-			room.players[clientUuid].send(
-				JSON.stringify({
-					cmd: "turn_timeout",
-					content: { uuid: playerUuid },
-				})
-			);
-		}
-	}
-	players.changeTurn(playerUuid);
-}
-
-//==========================================
-//Poderes
-//==========================================
-
-//Limpar a ultima linha do tabuleiro
-function clearLastLine(board) {
-	return [
-		Array(7).fill(" "), // Nova linha vazia no topo
-		...board.slice(0, 5), // Linhas 0-4 agora ocupam as posições 1-5
-	];
-}
-
-//Eliminar uma caixa específica
-function eliminateBox(board) {
-	const row = Math.floor(Math.random() * ROWS);
-	const col = Math.floor(Math.random() * COLS);
-	// Verifica se a posição existe e se há uma peça
-	if (row < 0 || row >= board.length || col < 0 || col >= board[0].length)
-		return false;
-	if (board[row][col] === " ") return false; // Sem peça para eliminar
-
-	// Elimina a peça no local indicado
-	for (let r = row; r > 0; r--) {
-		// Todas as peças acima descem uma linha
-		board[r][col] = board[r - 1][col];
-	}
-	// O topo (linha 0) vira vazio
-	board[0][col] = " ";
-	return board;
-}
-
-//Diminuir o tempo do oponente
-function reduceOpponentTime(roomId, opponentUuid) {
-	if (!turnTimers.has(roomId) || !turnTimers.get(roomId)[opponentUuid])
-		return;
-
-	// Reduz o tempo pela metade
-	const old = turnTimers.get(roomId)[opponentUuid];
-
-	// Cancela timer antigo
-	if (old.timer) clearTimeout(old.timer);
-
-	// Atualiza tempo
-	old.timeLeft = Math.floor(old.timeLeft / 2);
-	if (old.timeLeft <= 0) {
-		onPlayerTurnTimeout(roomId, opponentUuid);
-		return;
-	}
-
-	// Recria timer com novo tempo restant
-	old.timer = setTimeout(() => {
-		onPlayerTurnTimeout(roomId, opponentUuid);
-	}, old.timeLeft * 1000);
-
-	// Atualiza no mapa e avisa todos jogadores
-	turnTimers.get(roomId)[opponentUuid] = old;
-	sendTimeUpdate(roomId, opponentUuid, old.timeLeft);
-}
-
-//Bloqueia uma coluna específica
-function blockColumn(roomId, col) {
-	if (!blockedColumns.has(roomId)) {
-		blockedColumns.set(roomId, new Set());
-	}
-	blockedColumns.get(roomId).add(col);
-}
-
-//Desbloqueia uma coluna específica
-function unblockColumn(roomId, col) {
-	if (blockedColumns.has(roomId)) {
-		blockedColumns.get(roomId).delete(col);
-	}
-}
-
-//==========================================
-// Evento disparado quando um cliente conecta
 // ========================================
+// TURNOS E TIMERS
+// ========================================
+
+/**
+ * Inicia o timer de turno para um jogador
+ */
+function startPlayerTurn(roomId, playerUuid) {
+    if (turnTimers.has(roomId) && turnTimers.get(roomId)[playerUuid]?.timer) {
+        clearTimeout(turnTimers.get(roomId)[playerUuid].timer);
+    }
+
+    if (!turnTimers.has(roomId)) {
+        turnTimers.set(roomId, {});
+    }
+
+    turnTimers.get(roomId)[playerUuid] = {
+        timeLeft: TURN_TIME_MAX,
+        timer: setTimeout(() => {
+            onPlayerTurnTimeout(roomId, playerUuid);
+        }, TURN_TIME_MAX * 1000)
+    };
+
+    sendTimeUpdate(roomId, playerUuid, TURN_TIME_MAX);
+    console.log(`[Timer] Turno iniciado para ${playerUuid} na sala ${roomId}: ${TURN_TIME_MAX}s`);
+}
+
+/**
+ * Envia atualização de tempo para todos na sala
+ */
+function sendTimeUpdate(roomId, playerUuid, timeLeft) {
+    const room = rooms.get(roomId);
+    if (room) {
+        for (const clientUuid in room.players) {
+            room.players[clientUuid].send(JSON.stringify({
+                cmd: "turn_time_update",
+                content: { uuid: playerUuid, timeLeft }
+            }));
+        }
+    }
+}
+
+/**
+ * Chamado quando o tempo de turno acaba
+ */
+function onPlayerTurnTimeout(roomId, playerUuid) {
+    console.log(`[Timeout] Tempo acabou para ${playerUuid} na sala ${roomId}`);
+    
+    const room = rooms.get(roomId);
+    if (room) {
+        for (const clientUuid in room.players) {
+            room.players[clientUuid].send(JSON.stringify({
+                cmd: "turn_timeout",
+                content: { uuid: playerUuid }
+            }));
+        }
+    }
+
+    // Passa o turno para o outro jogador
+    const players = playerlist.getByRoom(roomId);
+    const losingPlayer = playerlist.get(playerUuid);
+    
+    if (losingPlayer) losingPlayer.t = false;
+
+    const nextPlayer = players.find(p => p.uuid !== playerUuid);
+    if (nextPlayer) {
+        nextPlayer.t = true;
+        startPlayerTurn(roomId, nextPlayer.uuid);
+
+        if (room) {
+            for (const clientUuid in room.players) {
+                room.players[clientUuid].send(JSON.stringify({
+                    cmd: "turn_changed",
+                    content: { uuid: nextPlayer.uuid }
+                }));
+            }
+        }
+    }
+}
+
+// ========================================
+// PODERES / HABILIDADES
+// ========================================
+
+/**
+ * Remove a última linha do tabuleiro
+ */
+function clearLastLine(board) {
+    return [
+        Array(COLS).fill(" "),  // Nova linha vazia no topo
+        ...board.slice(0, ROWS - 1)  // Linhas 0-4 caem para 1-5
+    ];
+}
+
+/**
+ * Elimina uma caixa aleatória (com seleção de linha/coluna aleatória)
+ */
+function eliminateBox(board) {
+    const row = Math.floor(Math.random() * ROWS);
+    const col = Math.floor(Math.random() * COLS);
+
+    if (board[row][col] === " ") {
+        return false; // Sem peça para eliminar
+    }
+
+    // Remove a peça e faz as acima caírem
+    for (let r = row; r > 0; r--) {
+        board[r][col] = board[r - 1][col];
+    }
+    board[0][col] = " ";
+    
+    return true;
+}
+
+/**
+ * Reduz o tempo do oponente pela metade
+ */
+function reduceOpponentTime(roomId, opponentUuid) {
+    if (!turnTimers.has(roomId) || !turnTimers.get(roomId)[opponentUuid]) {
+        return;
+    }
+
+    const timerData = turnTimers.get(roomId)[opponentUuid];
+    
+    if (timerData.timer) {
+        clearTimeout(timerData.timer);
+    }
+
+    timerData.timeLeft = Math.floor(timerData.timeLeft / 2);
+    console.log(`[Poder] Tempo do ${opponentUuid} reduzido para ${timerData.timeLeft}s`);
+
+    if (timerData.timeLeft <= 0) {
+        onPlayerTurnTimeout(roomId, opponentUuid);
+        return;
+    }
+
+    timerData.timer = setTimeout(() => {
+        onPlayerTurnTimeout(roomId, opponentUuid);
+    }, timerData.timeLeft * 1000);
+
+    sendTimeUpdate(roomId, opponentUuid, timerData.timeLeft);
+}
+
+// ========================================
+// BLOQUEIO DE COLUNAS
+// ========================================
+
+/**
+ * Bloqueia uma coluna específica em uma sala
+ */
+function blockColumn(roomId, col) {
+    if (!blockedColumns.has(roomId)) {
+        blockedColumns.set(roomId, new Set());
+    }
+    blockedColumns.get(roomId).add(col);
+    console.log(`[Bloqueio] Coluna ${col} bloqueada na sala ${roomId}`);
+}
+
+/**
+ * Desbloqueia uma coluna específica
+ */
+function unblockColumn(roomId, col) {
+    if (blockedColumns.has(roomId)) {
+        blockedColumns.get(roomId).delete(col);
+        console.log(`[Bloqueio] Coluna ${col} desbloqueada na sala ${roomId}`);
+    }
+}
+
+/**
+ * Verifica se uma coluna está bloqueada
+ */
+function isColumnBlocked(roomId, col) {
+    return blockedColumns.has(roomId) && blockedColumns.get(roomId).has(col);
+}
+
+// ========================================
+// UTILITÁRIOS GERAIS
+// ========================================
+
+/**
+ * Gera código aleatório para a sala
+ */
+function generateRoomCode(length = 5) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
+
+/**
+ * Envia o board atualizado para todos os jogadores da sala
+ */
+function broadcastBoardUpdate(roomId, board) {
+    const room = rooms.get(roomId);
+    if (room) {
+        for (const clientUuid in room.players) {
+            room.players[clientUuid].send(JSON.stringify({
+                cmd: "update_board",
+                content: { newBoard: board }
+            }));
+        }
+    }
+}
+
+// ========================================
+// WEBSOCKET - EVENTOS PRINCIPAIS
+// ========================================
+
 wss.on("connection", (socket) => {
-	const uuid = uuidv4(); // Gera ID único para o cliente
-	socket.uuid = uuid;
-	console.log(`Cliente conectado: ${uuid}`);
+    const uuid = uuidv4();
+    socket.uuid = uuid;
+    console.log(`[Conexão] Cliente conectado: ${uuid}`);
 
-	// Envia o UUID para o cliente assim que ele conecta
-	socket.send(
-		JSON.stringify({
-			cmd: "joined_server",
-			content: { uuid: uuid },
-		})
-	);
+    // Envia UUID ao cliente
+    socket.send(JSON.stringify({
+        cmd: "joined_server",
+        content: { uuid }
+    }));
 
-	// ========================================
-	// Recebe mensagens do cliente
-	// ========================================
-	socket.on("message", (message) => {
-		let data;
-		try {
-			data = JSON.parse(message.toString());
-			console.log("Data.CMD: ", data.cmd);
-			console.log("Data.content: ", data.content);
-		} catch (err) {
-			console.error("Erro ao parsear mensagem:", err);
-			return;
-		}
+    // ====================================
+    // RECEBE MENSAGENS DO CLIENTE
+    // ====================================
+    socket.on("message", (message) => {
+        let data;
+        try {
+            data = JSON.parse(message.toString());
+        } catch (err) {
+            console.error("Erro ao parsear mensagem:", err);
+            return;
+        }
 
-		switch (data.cmd) {
-			case "box_drop": {
-				const room = rooms.get(socket.roomId);
-				const requestingplayer = playerlist.get(uuid);
-				if (!requestingplayer.t) {
-					break;
-				}
-				console.log("Column", data.content);
-				const px = Math.floor(data.content.pos_x / BOX_SIZE);
-				console.log("Coluna", px);
+        const room = rooms.get(socket.roomId);
+        const board = getBoardForRoom(socket.roomId);
 
-				// Impede se a coluna estiver bloqueada
-				if (
-					blockedColumns.has(socket.roomId) &&
-					blockedColumns.get(socket.roomId).has(px)
-				) {
-					socket.send(
-						JSON.stringify({
-							cmd: "column_blocked",
-							content: { col: px },
-						})
-					);
-					break; // Impede jogada!
-				}
+        switch (data.cmd) {
+            case "create_room": {
+                const newRoomId = generateRoomCode();
+                socket.roomId = newRoomId;
+                rooms.set(newRoomId, { players: {} });
+                boards.set(newRoomId, create_board());
+                rooms.get(newRoomId).players[uuid] = socket;
 
-				const box_info = { x: data.content, z: requestingplayer.z };
-				if (room) {
-					for (const clientUuid in room.players) {
-						const client = room.players[clientUuid];
-						playerlist.changeTurn(clientUuid);
-						if (client.readyState === WebSocket.OPEN) {
-							client.send(
-								JSON.stringify({
-									cmd: "box_drop",
-									content: box_info,
-								})
-							);
-						}
-					}
-					addPiece(board, px, requestingplayer.z);
-					console.log(checkWin(board, requestingplayer.z));
-					printBoard(board);
-				}
-				break;
-			}
+                const newPlayer = playerlist.add(uuid, newRoomId);
+                console.log(`[Sala] ${newRoomId} criada por ${uuid}`);
 
-			case "create_room": {
-				// Gera novo código e cria sala
-				const newRoomId = generateRoomCode();
-				socket.roomId = newRoomId;
-				rooms.set(newRoomId, { players: {} });
-				rooms.get(newRoomId).players[uuid] = socket;
+                socket.send(JSON.stringify({
+                    cmd: "room_created",
+                    content: { code: newRoomId }
+                }));
 
-				// Adiciona o jogador à lista
-				const newPlayer = playerlist.add(uuid, newRoomId);
+                socket.send(JSON.stringify({
+                    cmd: "spawn_local_player",
+                    content: { player: newPlayer }
+                }));
 
-				console.log(`Sala ${newRoomId} criada pelo jogador ${uuid}`);
+                // Inicia timer do primeiro jogador
+                startPlayerTurn(newRoomId, uuid);
+                break;
+            }
 
-				// Responde ao cliente com o código da sala
-				socket.send(
-					JSON.stringify({
-						cmd: "room_created",
-						content: { code: newRoomId },
-					})
-				);
+            case "join_room": {
+                const roomCode = data.content.code.toUpperCase();
+                const roomToJoin = rooms.get(roomCode);
 
-				// Manda o jogador spawnar a si mesmo
-				socket.send(
-					JSON.stringify({
-						cmd: "spawn_local_player",
-						content: { player: newPlayer },
-					})
-				);
-				break;
-			}
+                if (!roomToJoin) {
+                    socket.send(JSON.stringify({
+                        cmd: "error",
+                        content: { msg: "Sala não encontrada." }
+                    }));
+                    return;
+                }
 
-			case "join_room": {
-				const roomCode = data.content.code.toUpperCase();
-				const roomToJoin = rooms.get(roomCode);
+                socket.roomId = roomCode;
+                roomToJoin.players[uuid] = socket;
+                const newPlayer = playerlist.add(uuid, roomCode);
 
-				if (!roomToJoin) {
-					socket.send(
-						JSON.stringify({
-							cmd: "error",
-							content: { msg: "Sala não encontrada." },
-						})
-					);
-					return;
-				}
+                console.log(`[Sala] ${uuid} entrou em ${roomCode}`);
 
-				// Adiciona o jogador na sala
-				socket.roomId = roomCode;
-				roomToJoin.players[uuid] = socket;
+                socket.send(JSON.stringify({
+                    cmd: "room_joined",
+                    content: { code: roomCode }
+                }));
 
-				const newPlayer = playerlist.add(uuid, socket.roomId);
+                socket.send(JSON.stringify({
+                    cmd: "spawn_local_player",
+                    content: { player: newPlayer }
+                }));
 
-				console.log(`Jogador ${uuid} entrou na sala ${socket.roomId}`);
+                const roomPlayers = playerlist.getByRoom(roomCode).filter(p => p.uuid !== uuid);
+                socket.send(JSON.stringify({
+                    cmd: "spawn_network_players",
+                    content: { players: roomPlayers }
+                }));
 
-				// Informa o jogador que entrou com sucesso
-				socket.send(
-					JSON.stringify({
-						cmd: "room_joined",
-						content: { code: socket.roomId },
-					})
-				);
+                for (const clientUuid in roomToJoin.players) {
+                    const client = roomToJoin.players[clientUuid];
+                    if (client !== socket && client.readyState === WebSocket.OPEN) {
+                        client.send(JSON.stringify({
+                            cmd: "spawn_new_player",
+                            content: { player: newPlayer }
+                        }));
+                    }
+                }
 
-				// Spawna o jogador local no cliente
-				socket.send(
-					JSON.stringify({
-						cmd: "spawn_local_player",
-						content: { player: newPlayer },
-					})
-				);
+                // Quando há 2 jogadores, começa o jogo
+                if (Object.keys(roomToJoin.players).length === 2) {
+                    console.log(`[Jogo] Iniciando em ${roomCode}`);
+                    for (const clientUuid in roomToJoin.players) {
+                        const client = roomToJoin.players[clientUuid];
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send(JSON.stringify({
+                                cmd: "start_game",
+                                content: {}
+                            }));
+                        }
+                    }
+                    
+                    // Inicia timer do segundo jogador
+                    const secondPlayer = playerlist.getByRoom(roomCode).find(p => p.uuid !== newPlayer.uuid);
+                    if (secondPlayer) {
+                        startPlayerTurn(roomCode, secondPlayer.uuid);
+                    }
+                }
+                break;
+            }
 
-				// Envia a lista dos jogadores já existentes na sala
-				const roomPlayers = playerlist
-					.getByRoom(socket.roomId)
-					.filter((p) => p.uuid !== uuid);
+            case "box_drop": {
+                const requestingPlayer = playerlist.get(uuid);
+                
+                if (!requestingPlayer || !requestingPlayer.t) {
+                    console.log(`[Jogada] ${uuid} tentou jogar fora de turno`);
+                    break;
+                }
 
-				socket.send(
-					JSON.stringify({
-						cmd: "spawn_network_players",
-						content: { players: roomPlayers },
-					})
-				);
+                const px = Math.floor(data.content.pos_x / BOX_SIZE);
 
-				// Avisa os jogadores antigos que entrou um novo player
-				for (const clientUuid in roomToJoin.players) {
-					const client = roomToJoin.players[clientUuid];
-					if (
-						client !== socket &&
-						client.readyState === WebSocket.OPEN
-					) {
-						client.send(
-							JSON.stringify({
-								cmd: "spawn_new_player",
-								content: { player: newPlayer },
-							})
-						);
-					}
-				}
+                // Valida coluna bloqueada
+                if (isColumnBlocked(socket.roomId, px)) {
+                    socket.send(JSON.stringify({
+                        cmd: "column_blocked",
+                        content: { col: px }
+                    }));
+                    console.log(`[Bloqueio] ${uuid} tentou jogar em coluna bloqueada ${px}`);
+                    break;
+                }
 
-				// Quando há 2 jogadores na sala, começa o jogo
-				if (Object.keys(roomToJoin.players).length === 2) {
-					console.log(
-						`Sala ${socket.roomId} atingiu o número de jogadores. Começando o jogo!`
-					);
-					for (const clientUuid in roomToJoin.players) {
-						const client = roomToJoin.players[clientUuid];
-						if (client.readyState === WebSocket.OPEN) {
-							client.send(
-								JSON.stringify({
-									cmd: "start_game",
-									content: {},
-								})
-							);
-						}
-					}
-				}
-				break;
-			}
+                // Adiciona a peça
+                if (!addPiece(board, px, requestingPlayer.z)) {
+                    socket.send(JSON.stringify({
+                        cmd: "column_full",
+                        content: { col: px }
+                    }));
+                    break;
+                }
 
-			case "position": {
-				// Atualiza posição do jogador no servidor
-				playerlist.update(uuid, data.content.x, data.content.y);
-				const room = rooms.get(socket.roomId);
-				if (room) {
-					// Repassa para os outros jogadores da sala
-					for (const clientUuid in room.players) {
-						const client = room.players[clientUuid];
-						if (
-							client !== socket &&
-							client.readyState === WebSocket.OPEN
-						) {
-							client.send(
-								JSON.stringify({
-									cmd: "update_position",
-									content: {
-										uuid: uuid,
-										x: data.content.x,
-										y: data.content.y,
-									},
-								})
-							);
-						}
-					}
-				}
-				break;
-			}
+                console.log(`[Jogada] ${uuid} (${requestingPlayer.z}) em coluna ${px}`);
 
-			case "chat": {
-				// Repassa a mensagem de chat para todos os jogadores na sala
-				const room = rooms.get(socket.roomId);
-				if (room) {
-					for (const clientUuid in room.players) {
-						const client = room.players[clientUuid];
-						if (client.readyState === WebSocket.OPEN) {
-							client.send(
-								JSON.stringify({
-									cmd: "new_chat_message",
-									content: {
-										uuid: uuid,
-										msg: data.content.msg,
-									},
-								})
-							);
-						}
-					}
-				}
-				break;
-			}
-			case "clear_bottom_line": {
-				// Limpa a última linha do tabuleiro
-				board = clearLastLine(board);
-				const room = rooms.get(socket.roomId);
-				if (room) {
-					for (const clientUuid in room.players) {
-						const client = room.players[clientUuid];
-						if (client.readyState === WebSocket.OPEN) {
-							client.send(
-								JSON.stringify({
-									cmd: "bottom_line_cleared",
-									content: { newBoard: board },
-								})
-							);
-						}
-					}
-					printBoard(board);
-				}
-				break;
-			}
-			case "eliminate_box": {
-				// Elimina uma caixa aleatória do tabuleiro
-				board = eliminateBox(board);
-				const room = rooms.get(socket.roomId);
-				if (room) {
-					for (const clientUuid in room.players) {
-						const client = room.players[clientUuid];
-						if (client.readyState === WebSocket.OPEN) {
-							client.send(
-								JSON.stringify({
-									cmd: "box_eliminated",
-									content: { newBoard: board },
-								})
-							);
-						}
-					}
-					printBoard(board);
-				}
-				break;
-			}
-			case "reduce_opponent_time": {
-				// Reduz o tempo do oponente pela metade
-				reduceOpponentTime(socket.roomId, data.content.targetUuid);
-				break;
-			}
-			case "block_column": {
-				// Bloqueia uma coluna específica
-				const col = data.content.col; // Coluna recebida do cliente/poder
-				blockColumn(socket.roomId, col);
-				break;
-			}
-		}
-	});
+                // Envia para todos os jogadores
+                if (room) {
+                    for (const clientUuid in room.players) {
+                        room.players[clientUuid].send(JSON.stringify({
+                            cmd: "box_drop",
+                            content: { x: data.content, z: requestingPlayer.z }
+                        }));
+                    }
+                }
 
-	//========================================
-	// Evento disparado quando o cliente desconecta
-	//========================================
-	socket.on("close", () => {
-		console.log(`Cliente desconectado: ${uuid}`);
+                // Verifica vitória
+                if (checkWin(board, requestingPlayer.z)) {
+                    console.log(`[Vitória] ${requestingPlayer.z} venceu!`);
+                    if (room) {
+                        for (const clientUuid in room.players) {
+                            room.players[clientUuid].send(JSON.stringify({
+                                cmd: "game_over",
+                                content: { winner: requestingPlayer.z }
+                            }));
+                        }
+                    }
+                    break;
+                }
 
-		playerlist.remove(uuid);
+                // Verifica empate
+                if (checkTie(board)) {
+                    console.log(`[Empate] Tabuleiro cheio!`);
+                    if (room) {
+                        for (const clientUuid in room.players) {
+                            room.players[clientUuid].send(JSON.stringify({
+                                cmd: "game_over",
+                                content: { winner: "tie" }
+                            }));
+                        }
+                    }
+                    break;
+                }
 
-		const room = rooms.get(socket.roomId);
-		if (room) {
-			delete room.players[uuid];
+                // Troca de turno
+                const players = playerlist.getByRoom(socket.roomId);
+                requestingPlayer.t = false;
+                const nextPlayer = players.find(p => p.uuid !== uuid);
+                
+                if (nextPlayer) {
+                    nextPlayer.t = true;
+                    startPlayerTurn(socket.roomId, nextPlayer.uuid);
 
-			// Avisa os outros jogadores que alguém saiu
-			for (const clientUuid in room.players) {
-				const client = room.players[clientUuid];
-				if (client.readyState === WebSocket.OPEN) {
-					client.send(
-						JSON.stringify({
-							cmd: "player_disconnected",
-							content: { uuid: uuid },
-						})
-					);
-				}
-			}
+                    if (room) {
+                        for (const clientUuid in room.players) {
+                            room.players[clientUuid].send(JSON.stringify({
+                                cmd: "turn_changed",
+                                content: { uuid: nextPlayer.uuid }
+                            }));
+                        }
+                    }
+                }
 
-			// Remove a sala se ela ficou vazia
-			if (Object.keys(room.players).length === 0) {
-				rooms.delete(socket.roomId);
-				console.log(`Sala ${socket.roomId} vazia e removida.`);
-				board = create_board();
-			}
-		}
-	});
+                printBoard(board);
+                break;
+            }
+
+            case "position": {
+                playerlist.update(uuid, data.content.x, data.content.y);
+
+                if (room) {
+                    for (const clientUuid in room.players) {
+                        const client = room.players[clientUuid];
+                        if (client !== socket && client.readyState === WebSocket.OPEN) {
+                            client.send(JSON.stringify({
+                                cmd: "update_position",
+                                content: {
+                                    uuid,
+                                    x: data.content.x,
+                                    y: data.content.y
+                                }
+                            }));
+                        }
+                    }
+                }
+                break;
+            }
+
+            case "chat": {
+                if (room) {
+                    for (const clientUuid in room.players) {
+                        const client = room.players[clientUuid];
+                        if (client.readyState === WebSocket.OPEN) {
+                            client.send(JSON.stringify({
+                                cmd: "new_chat_message",
+                                content: {
+                                    uuid,
+                                    msg: data.content.msg
+                                }
+                            }));
+                        }
+                    }
+                }
+                break;
+            }
+
+            case "clear_bottom_line": {
+                boards.set(socket.roomId, clearLastLine(board));
+                broadcastBoardUpdate(socket.roomId, boards.get(socket.roomId));
+                console.log(`[Poder] Linha removida em ${socket.roomId}`);
+                break;
+            }
+
+            case "eliminate_box": {
+                if (eliminateBox(board)) {
+                    broadcastBoardUpdate(socket.roomId, board);
+                    console.log(`[Poder] Caixa eliminada em ${socket.roomId}`);
+                }
+                break;
+            }
+
+            case "reduce_opponent_time": {
+                const targetUuid = data.content.targetUuid;
+                reduceOpponentTime(socket.roomId, targetUuid);
+                console.log(`[Poder] Tempo reduzido para ${targetUuid}`);
+                break;
+            }
+
+            case "block_column": {
+                const col = data.content.col;
+                blockColumn(socket.roomId, col);
+                
+                if (room) {
+                    for (const clientUuid in room.players) {
+                        room.players[clientUuid].send(JSON.stringify({
+                            cmd: "column_blocked_notify",
+                            content: { col }
+                        }));
+                    }
+                }
+                break;
+            }
+
+            case "unblock_column": {
+                const col = data.content.col;
+                unblockColumn(socket.roomId, col);
+                break;
+            }
+
+            default: {
+                console.log(`[Comando desconhecido] ${data.cmd}`);
+            }
+        }
+    });
+
+    // ====================================
+    // DESCONEXÃO
+    // ====================================
+    socket.on("close", () => {
+        console.log(`[Desconexão] Cliente ${uuid} desconectou`);
+        playerlist.remove(uuid);
+
+        const room = rooms.get(socket.roomId);
+        if (room) {
+            delete room.players[uuid];
+
+            // Notifica outros jogadores
+            for (const clientUuid in room.players) {
+                const client = room.players[clientUuid];
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify({
+                        cmd: "player_disconnected",
+                        content: { uuid }
+                    }));
+                }
+            }
+
+            // Remove sala se ficar vazia
+            if (Object.keys(room.players).length === 0) {
+                rooms.delete(socket.roomId);
+                cleanUpRoom(socket.roomId);
+            }
+        }
+    });
 });
+
+console.log("\n=== SERVIDOR INICIADO COM SUCESSO ===");
+console.log("Comandos suportados:");
+console.log("  - create_room");
+console.log("  - join_room");
+console.log("  - box_drop");
+console.log("  - position");
+console.log("  - chat");
+console.log("  - clear_bottom_line");
+console.log("  - eliminate_box");
+console.log("  - reduce_opponent_time");
+console.log("  - block_column");
+console.log("  - unblock_column");
+console.log("=====================================\n");
