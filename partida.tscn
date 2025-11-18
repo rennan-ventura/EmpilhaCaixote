@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="1_b35dw"]
 [ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="1_fxb2x"]
 [ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://assets/esteira.png" id="1_pncst"]
-[ext_resource type="Script" uid="uid://k6hef56xxq38" path="res://partida.gd" id="1_w6ttt"]
+[ext_resource type="Script" uid="uid://duxu83nccxmiv" path="res://partida.gd" id="1_w6ttt"]
 [ext_resource type="Texture2D" uid="uid://bylacrivjblce" path="res://assets/metal_pipe.png" id="4_xr4ag"]
 [ext_resource type="Texture2D" uid="uid://dl0ynjbe5daeu" path="res://assets/metal_caixa.png" id="5_sajtd"]
 [ext_resource type="Texture2D" uid="uid://b7y4ovyb2cxn" path="res://assets/cinto.png" id="8_043r5"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://4bt40mn4jbnu" path="res://assets/tabuleiro.png" id="18_vql25"]
 [ext_resource type="Texture2D" uid="uid://cwd18slqtmsnp" path="res://assets/pe_tabuleiro.png" id="19_8ciw8"]
 [ext_resource type="PackedScene" uid="uid://dl8xxn4f53324" path="res://statictest.tscn" id="20_8neug"]
-[ext_resource type="Script" uid="uid://c0gi1dxtnr28k" path="res://control.gd" id="22_2ssqj"]
+[ext_resource type="Script" uid="uid://d084kgyvyc4l6" path="res://control.gd" id="22_2ssqj"]
 [ext_resource type="PackedScene" uid="uid://dsgof3lj0ld80" path="res://BasePlate.tscn" id="22_8ciw8"]
 [ext_resource type="PackedScene" uid="uid://uydxykb80883" path="res://caixa_vermelha_X.tscn" id="22_w6ttt"]
 
@@ -60,7 +60,7 @@ script = ExtResource("1_w6ttt")
 
 [node name="Fundo" type="Sprite2D" parent="."]
 position = Vector2(180.50002, 90.5)
-scale = Vector2(0.3525391, 0.32118052)
+scale = Vector2(1.1, 1)
 texture = ExtResource("1_fxb2x")
 
 [node name="esteira" type="AnimatedSprite2D" parent="."]
