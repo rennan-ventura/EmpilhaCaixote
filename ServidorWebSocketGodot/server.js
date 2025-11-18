@@ -22,8 +22,8 @@ const { v4: uuidv4 } = require("uuid");
 // CONFIGURAÇÃO DO SERVIDOR
 // ========================================
 const app = express();
-const PORT = process.env.PORT || 9090;
-const server = app.listen(PORT, () => {
+const PORT = 50000;
+const server = app.listen(50000, '0.0.0.0', () => {
     console.log(`✓ Servidor iniciado na porta: ${PORT}`);
 });
 const wss = new WebSocket.Server({ server });
@@ -108,9 +108,9 @@ function checkWin(board, piece) {
     // Horizontal
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c <= cols - 4; c++) {
-            if (board[r][c] === piece && 
-                board[r][c + 1] === piece && 
-                board[r][c + 2] === piece && 
+            if (board[r][c] === piece &&
+                board[r][c + 1] === piece &&
+                board[r][c + 2] === piece &&
                 board[r][c + 3] === piece) {
                 return true;
             }
@@ -120,9 +120,9 @@ function checkWin(board, piece) {
     // Vertical
     for (let c = 0; c < cols; c++) {
         for (let r = 0; r <= rows - 4; r++) {
-            if (board[r][c] === piece && 
-                board[r + 1][c] === piece && 
-                board[r + 2][c] === piece && 
+            if (board[r][c] === piece &&
+                board[r + 1][c] === piece &&
+                board[r + 2][c] === piece &&
                 board[r + 3][c] === piece) {
                 return true;
             }
@@ -132,9 +132,9 @@ function checkWin(board, piece) {
     // Diagonal descendente
     for (let r = 0; r <= rows - 4; r++) {
         for (let c = 0; c <= cols - 4; c++) {
-            if (board[r][c] === piece && 
-                board[r + 1][c + 1] === piece && 
-                board[r + 2][c + 2] === piece && 
+            if (board[r][c] === piece &&
+                board[r + 1][c + 1] === piece &&
+                board[r + 2][c + 2] === piece &&
                 board[r + 3][c + 3] === piece) {
                 return true;
             }
@@ -144,9 +144,9 @@ function checkWin(board, piece) {
     // Diagonal ascendente
     for (let r = 3; r < rows; r++) {
         for (let c = 0; c <= cols - 4; c++) {
-            if (board[r][c] === piece && 
-                board[r - 1][c + 1] === piece && 
-                board[r - 2][c + 2] === piece && 
+            if (board[r][c] === piece &&
+                board[r - 1][c + 1] === piece &&
+                board[r - 2][c + 2] === piece &&
                 board[r - 3][c + 3] === piece) {
                 return true;
             }
@@ -169,15 +169,15 @@ function checkTie(board) {
 const playerlist = {
     players: [],
 
-    getAll: function () {
+    getAll: function() {
         return this.players;
     },
 
-    get: function (uuid) {
+    get: function(uuid) {
         return this.players.find(p => p.uuid === uuid);
     },
 
-    add: function (uuid, roomCode) {
+    add: function(uuid, roomCode) {
         const playersInRoom = this.getByRoom(roomCode);
         const isFirstPlayer = playersInRoom.length === 0;
         let turn = false;
@@ -206,7 +206,7 @@ const playerlist = {
         return player;
     },
 
-    update: function (uuid, newX, newY) {
+    update: function(uuid, newX, newY) {
         const player = this.get(uuid);
         if (player) {
             player.x = newX;
@@ -214,11 +214,11 @@ const playerlist = {
         }
     },
 
-    remove: function (uuid) {
+    remove: function(uuid) {
         this.players = this.players.filter(p => p.uuid !== uuid);
     },
 
-    getByRoom: function (roomCode) {
+    getByRoom: function(roomCode) {
         return this.players.filter(p => p.room === roomCode);
     }
 };
@@ -270,7 +270,7 @@ function sendTimeUpdate(roomId, playerUuid, timeLeft) {
  */
 function onPlayerTurnTimeout(roomId, playerUuid) {
     console.log(`[Timeout] Tempo acabou para ${playerUuid} na sala ${roomId}`);
-    
+
     const room = rooms.get(roomId);
     if (room) {
         for (const clientUuid in room.players) {
@@ -284,7 +284,7 @@ function onPlayerTurnTimeout(roomId, playerUuid) {
     // Passa o turno para o outro jogador
     const players = playerlist.getByRoom(roomId);
     const losingPlayer = playerlist.get(playerUuid);
-    
+
     if (losingPlayer) losingPlayer.t = false;
 
     const nextPlayer = players.find(p => p.uuid !== playerUuid);
@@ -333,7 +333,7 @@ function eliminateBox(board) {
         board[r][col] = board[r - 1][col];
     }
     board[0][col] = " ";
-    
+
     return true;
 }
 
@@ -346,7 +346,7 @@ function reduceOpponentTime(roomId, opponentUuid) {
     }
 
     const timerData = turnTimers.get(roomId)[opponentUuid];
-    
+
     if (timerData.timer) {
         clearTimeout(timerData.timer);
     }
@@ -541,7 +541,7 @@ wss.on("connection", (socket) => {
                             }));
                         }
                     }
-                    
+
                     // Inicia timer do segundo jogador
                     const secondPlayer = playerlist.getByRoom(roomCode).find(p => p.uuid !== newPlayer.uuid);
                     if (secondPlayer) {
@@ -553,7 +553,7 @@ wss.on("connection", (socket) => {
 
             case "box_drop": {
                 const requestingPlayer = playerlist.get(uuid);
-                
+
                 if (!requestingPlayer || !requestingPlayer.t) {
                     console.log(`[Jogada] ${uuid} tentou jogar fora de turno`);
                     break;
@@ -624,7 +624,7 @@ wss.on("connection", (socket) => {
                 const players = playerlist.getByRoom(socket.roomId);
                 requestingPlayer.t = false;
                 const nextPlayer = players.find(p => p.uuid !== uuid);
-                
+
                 if (nextPlayer) {
                     nextPlayer.t = true;
                     startPlayerTurn(socket.roomId, nextPlayer.uuid);
@@ -707,7 +707,7 @@ wss.on("connection", (socket) => {
             case "block_column": {
                 const col = data.content.col;
                 blockColumn(socket.roomId, col);
-                
+
                 if (room) {
                     for (const clientUuid in room.players) {
                         room.players[clientUuid].send(JSON.stringify({
