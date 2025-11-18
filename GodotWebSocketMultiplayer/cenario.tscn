@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhmhhldjwx2ao"]
+
+[ext_resource type="Script" uid="uid://dagtvvevlfoeh" path="res://cenario.gd" id="1_g3h26"]
+[ext_resource type="Script" uid="uid://cvrwkddkbejq6" path="res://demo/cenas/player_container.gd" id="2_fqljg"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_po0nb"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qijgh"]
+distance = -324.0
+
+[node name="cenario" type="Node2D"]
+script = ExtResource("1_g3h26")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.78039217, 0.78431374, 0.79607844, 0.27450982)
+scale = Vector2(1152, 648)
+texture = SubResource("CanvasTexture_po0nb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+physics_interpolation_mode = 2
+shape = SubResource("WorldBoundaryShape2D_qijgh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+script = ExtResource("2_fqljg")

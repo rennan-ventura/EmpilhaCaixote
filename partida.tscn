@@ -1,12 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://c43eeukqucn7u"]
+[gd_scene load_steps=30 format=3 uid="uid://c43eeukqucn7u"]
 
 [ext_resource type="Texture2D" uid="uid://dvy5awink2cvi" path="res://assets/cart.png" id="1_b35dw"]
 [ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="1_fxb2x"]
 [ext_resource type="Texture2D" uid="uid://dldru1lpfokdn" path="res://assets/esteira.png" id="1_pncst"]
+[ext_resource type="Script" uid="uid://k6hef56xxq38" path="res://partida.gd" id="1_w6ttt"]
 [ext_resource type="Texture2D" uid="uid://bylacrivjblce" path="res://assets/metal_pipe.png" id="4_xr4ag"]
 [ext_resource type="Texture2D" uid="uid://dl0ynjbe5daeu" path="res://assets/metal_caixa.png" id="5_sajtd"]
-[ext_resource type="Texture2D" uid="uid://4bt40mn4jbnu" path="res://assets/tabuleiro.png" id="6_sajtd"]
-[ext_resource type="Texture2D" uid="uid://cwd18slqtmsnp" path="res://assets/pe_tabuleiro.png" id="7_j0csv"]
 [ext_resource type="Texture2D" uid="uid://b7y4ovyb2cxn" path="res://assets/cinto.png" id="8_043r5"]
 [ext_resource type="Texture2D" uid="uid://x2fuwq0frc3m" path="res://assets/tela_digital.png" id="8_sqgtc"]
 [ext_resource type="Texture2D" uid="uid://bnioryehqj5y5" path="res://assets/claw_gray_1.png" id="9_5lwrr"]
@@ -15,12 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://445xr7pwh1x6" path="res://assets/claw_gray_pole.png" id="10_8wu3b"]
 [ext_resource type="Texture2D" uid="uid://dwu3micvapads" path="res://assets/bolso.png" id="10_kfm3e"]
 [ext_resource type="Script" uid="uid://cxoqfv85hy0la" path="res://Scripts/leftClaw.gd" id="10_vql25"]
-[ext_resource type="Texture2D" uid="uid://bib63jrac01qd" path="res://assets/caixa_vermelho_x.png" id="11_68i2n"]
 [ext_resource type="Texture2D" uid="uid://c31qkq6k64o42" path="res://assets/caixa_azul_o.png" id="12_8rq8l"]
 [ext_resource type="Texture2D" uid="uid://jssd36ovftud" path="res://assets/players/player_loiro_1.png" id="16_8neug"]
 [ext_resource type="Texture2D" uid="uid://cvn10bsiukqgy" path="res://assets/players/player_moren_1.png" id="17_vql25"]
-[ext_resource type="Texture2D" uid="uid://chq17dc4kd71j" path="res://assets/empty_point.png" id="18_5lwrr"]
-[ext_resource type="PackedScene" uid="uid://xunb5wcyavhs" path="res://statictest.tscn" id="20_8neug"]
+[ext_resource type="Texture2D" uid="uid://4bt40mn4jbnu" path="res://assets/tabuleiro.png" id="18_vql25"]
+[ext_resource type="Texture2D" uid="uid://cwd18slqtmsnp" path="res://assets/pe_tabuleiro.png" id="19_8ciw8"]
+[ext_resource type="PackedScene" uid="uid://dl8xxn4f53324" path="res://statictest.tscn" id="20_8neug"]
+[ext_resource type="Script" uid="uid://c0gi1dxtnr28k" path="res://control.gd" id="22_2ssqj"]
+[ext_resource type="PackedScene" uid="uid://dsgof3lj0ld80" path="res://BasePlate.tscn" id="22_8ciw8"]
+[ext_resource type="PackedScene" uid="uid://uydxykb80883" path="res://caixa_vermelha_X.tscn" id="22_w6ttt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxb2x"]
 atlas = ExtResource("1_pncst")
@@ -45,12 +47,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8wu3b"]
-size = Vector2(6, 29.5)
+size = Vector2(6, 30.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ssqj"]
+size = Vector2(15, 49.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8neug"]
 size = Vector2(6, 58)
 
 [node name="Partida" type="Node2D"]
+script = ExtResource("1_w6ttt")
 
 [node name="Fundo" type="Sprite2D" parent="."]
 position = Vector2(180.50002, 90.5)
@@ -94,43 +100,6 @@ texture = ExtResource("4_xr4ag")
 position = Vector2(-48, 0)
 texture = ExtResource("5_sajtd")
 
-[node name="Tabuleiro" type="Sprite2D" parent="."]
-position = Vector2(176, 112)
-texture = ExtResource("6_sajtd")
-
-[node name="PeTabuleiro" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(-1, 58)
-scale = Vector2(2, 1)
-texture = ExtResource("7_j0csv")
-
-[node name="TelaDigital3" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(1, 55.5)
-texture = ExtResource("8_sqgtc")
-
-[node name="EmptyPoint" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(-54, 57.5)
-texture = ExtResource("18_5lwrr")
-
-[node name="EmptyPoint2" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(-48, 57.5)
-texture = ExtResource("18_5lwrr")
-
-[node name="EmptyPoint3" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(-42, 57.5)
-texture = ExtResource("18_5lwrr")
-
-[node name="EmptyPoint4" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(41, 57.5)
-texture = ExtResource("18_5lwrr")
-
-[node name="EmptyPoint5" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(47, 57.5)
-texture = ExtResource("18_5lwrr")
-
-[node name="EmptyPoint6" type="Sprite2D" parent="Tabuleiro"]
-position = Vector2(53, 57.5)
-texture = ExtResource("18_5lwrr")
-
 [node name="Claw1" type="CharacterBody2D" parent="."]
 position = Vector2(82, 6)
 scale = Vector2(1, 2)
@@ -148,11 +117,19 @@ scale = Vector2(1, 2)
 texture = ExtResource("10_8wu3b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Claw1"]
-position = Vector2(0, -0.5)
+position = Vector2(0, -0.125)
 shape = SubResource("RectangleShape2D_8wu3b")
 
-[node name="Marker2D" type="Marker2D" parent="Claw1"]
-position = Vector2(1, 21.5)
+[node name="item_position" type="Marker2D" parent="Claw1"]
+position = Vector2(0, 23.5)
+
+[node name="Area2D" type="Area2D" parent="Claw1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw1/Area2D"]
+light_mask = 17
+visibility_layer = 17
+position = Vector2(0, 6.125)
+shape = SubResource("RectangleShape2D_2ssqj")
 
 [node name="Claw2" type="CharacterBody2D" parent="."]
 position = Vector2(279, 48)
@@ -211,10 +188,6 @@ texture = ExtResource("10_kfm3e")
 position = Vector2(344, 169)
 texture = ExtResource("10_kfm3e")
 
-[node name="CaixaVermelhoX" type="Sprite2D" parent="."]
-position = Vector2(83, 74)
-texture = ExtResource("11_68i2n")
-
 [node name="CaixaAzulO" type="Sprite2D" parent="."]
 position = Vector2(280, 79)
 texture = ExtResource("12_8rq8l")
@@ -241,3 +214,53 @@ position = Vector2(50, 13)
 
 [node name="invisibleWall" parent="." instance=ExtResource("20_8neug")]
 position = Vector2(310, 11)
+
+[node name="tabuleiro" type="Sprite2D" parent="."]
+position = Vector2(181, 107)
+texture = ExtResource("18_vql25")
+
+[node name="pe_tabuleiro" type="Sprite2D" parent="tabuleiro"]
+position = Vector2(1, 58)
+scale = Vector2(1.9843752, 1)
+texture = ExtResource("19_8ciw8")
+
+[node name="TelaDigital3" type="Sprite2D" parent="tabuleiro"]
+position = Vector2(-0.5000036, 58.750008)
+scale = Vector2(1.4687501, 1.4333332)
+texture = ExtResource("8_sqgtc")
+
+[node name="invisibleWall2" parent="." instance=ExtResource("22_8ciw8")]
+position = Vector2(155, 166)
+
+[node name="caixa_vermelha_x" parent="." instance=ExtResource("22_w6ttt")]
+position = Vector2(82, 74)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("22_2ssqj")
+default_minutes = 0
+default_seconds = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 154.0
+offset_right = 201.0
+offset_bottom = 177.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="global_timer" type="Label" parent="Control/HBoxContainer"]
+layout_mode = 2
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="clock_timer" type="Timer" parent="Control"]
+autostart = true
+
+[connection signal="area_entered" from="Claw1/Area2D" to="Claw1" method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Control/clock_timer" to="Control" method="_on_clock_timer_timeout"]

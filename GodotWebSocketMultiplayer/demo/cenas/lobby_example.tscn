@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3pil7ks0jcdu"]
+
+[ext_resource type="Script" uid="uid://bmw1nje5imhnc" path="res://demo/scripts/lobby_example.gd" id="1_8eg6v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vaqyl"]
+font_size = 35
+
+[node name="lobby_example" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8eg6v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.5
+offset_top = -95.0
+offset_right = 94.5
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreateRoomButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Criar Sala"
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="RoomCodeLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 35
+placeholder_text = "Código da Sala"
+alignment = 1
+
+[node name="JoinRoomButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Entrar na Sala"
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Desconectado"
+label_settings = SubResource("LabelSettings_vaqyl")
