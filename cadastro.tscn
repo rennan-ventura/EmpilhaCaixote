@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b66pj2l3el6xf"]
+[gd_scene load_steps=8 format=3 uid="uid://b66pj2l3el6xf"]
 
+[ext_resource type="Script" uid="uid://cjsc1j7cil61o" path="res://cadastro.gd" id="1_0widr"]
 [ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_qqjb7"]
 [ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="2_2hmeo"]
 [ext_resource type="Texture2D" uid="uid://cpxstnobxwixu" path="res://assets/cadastro_title.png" id="3_8jsjo"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0widr")
 
 [node name="bg" type="TextureRect" parent="."]
 layout_mode = 0
@@ -27,7 +29,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -1.5
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
@@ -56,12 +58,13 @@ texture = ExtResource("3_8jsjo")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer2/MarginContainer"]
-custom_minimum_size = Vector2(350, 0)
+custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 0
@@ -166,3 +169,7 @@ layout_mode = 2
 theme = ExtResource("4_jd4jr")
 theme_override_font_sizes/font_size = 10
 text = "CADASTRAR"
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/voltar_btn" to="." method="_on_voltar_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/login_btn" to="." method="_on_login_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer2/MarginContainer2/HBoxContainer/cadastrar_btn" to="." method="_on_cadastrar_btn_pressed"]
