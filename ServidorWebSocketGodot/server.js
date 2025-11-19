@@ -23,7 +23,7 @@ const { v4: uuidv4 } = require("uuid");
 // ========================================
 const app = express();
 const PORT = 50000;
-const server = app.listen(50000, '0.0.0.0', () => {
+const server = app.listen(9090, '0.0.0.0', () => {
     console.log(`✓ Servidor iniciado na porta: ${PORT}`);
 });
 const wss = new WebSocket.Server({ server });

@@ -53,8 +53,8 @@ func _check_falling():
 		can_drop = true
 		return
 
-	for box in boxes:
-		if box.falling == true:
+	for b in boxes:
+		if b.falling == true:
 			can_drop = false
 			return
 
@@ -72,7 +72,7 @@ func _unhandled_input(event):
 					return
 				if(!can_drop):
 					return
-				server_handle.send_message("box_drop", {"pos_x": snapped(local_pos.x, 64) - left_offset})
+				server_handle.send_message("box_drop", {"pos_x": snapped(local_pos.x - left_offset, 64)})
 				
 func _on_box_drop(data):
 	_spawn_box(data["x"]["pos_x"], data["z"])
