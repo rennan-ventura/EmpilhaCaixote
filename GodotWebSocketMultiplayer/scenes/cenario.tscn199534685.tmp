@@ -1,19 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://bhmhhldjwx2ao"]
 
-[ext_resource type="Script" uid="uid://nexo1j8js7jp" path="res://cenario.gd" id="1_g3h26"]
-[ext_resource type="Script" uid="uid://cq5d5064lbcb6" path="res://demo/cenas/player_container.gd" id="2_fqljg"]
-[ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="2_xwuul"]
+[ext_resource type="Script" uid="uid://ca8y4xe06jet5" path="res://scenes/cenario.gd" id="1_4xtve"]
+[ext_resource type="Texture2D" uid="uid://dy7plk5yu6kfa" path="res://assets/fundos/fundo.png" id="2_kfbu0"]
+[ext_resource type="Script" uid="uid://cq5d5064lbcb6" path="res://demo/cenas/player_container.gd" id="3_paand"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qijgh"]
 distance = -324.0
 
 [node name="cenario" type="Node2D"]
-script = ExtResource("1_g3h26")
+script = ExtResource("1_4xtve")
 
 [node name="Fundo" type="Sprite2D" parent="."]
 position = Vector2(600.61835, 351.96844)
 scale = Vector2(-1.1730827, 1.2255849)
-texture = ExtResource("2_xwuul")
+texture = ExtResource("2_kfbu0")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(603.1543, 351.23642)
@@ -27,9 +27,9 @@ position = Vector2(603.1543, 351.23642)
 
 [node name="PlayerContainer" type="Node2D" parent="."]
 position = Vector2(603.1543, 351.23642)
-script = ExtResource("2_fqljg")
+script = ExtResource("3_paand")
 
-[node name="Button" type="Button" parent="."]
+[node name="EliminarLinha" type="Button" parent="."]
 offset_left = 90.0
 offset_top = 609.0
 offset_right = 196.0
@@ -37,4 +37,4 @@ offset_bottom = 640.0
 text = "Limpar linha
 "
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="EliminarLinha" to="." method="_on_eliminar_linha_pressed"]

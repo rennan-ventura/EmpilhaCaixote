@@ -16,8 +16,14 @@ signal spawn_network_players(players_data)
 signal update_position(position_data)
 signal player_disconnected(player_data)
 
+# -- Timers---
+signal turn_changed(data)
+signal turn_timeout(data)
+signal turn_time_update(data)
+
 # Empilha Caixote
 signal box_drop(data)
+signal update_board(data)
 
 var uuid: String = ""              # Identificador único do jogador
 var _peer := WebSocketPeer.new()   # Conexão WebSocket
@@ -95,5 +101,17 @@ func handle_incoming_data(data: Dictionary):
 			emit_signal("player_disconnected", content)
 		"error":
 			emit_signal("server_error", content)
+		"turn_changed":
+			emit_signal("turn_changed", content)
+		"turn_timeout":
+			emit_signal("turn_timeout", content)
+		"turn_time_update":
+			emit_signal("turn_time_update", content)
+		"update_board":
+			emit_signal("update_board", content)
+		"bottom_line_cleared":
+			emit_signal("update_board", content)
+		"box_eliminated":
+			emit_signal("update_board", content)
 		_:
 			push_error("Comando não reconhecido do servidor: %s" % cmd)

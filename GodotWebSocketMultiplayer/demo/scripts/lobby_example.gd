@@ -83,7 +83,7 @@ func _on_room_joined(data: Dictionary):
 	
 func _load_world_scene():
 	# Troca para a cena do jogo quando todos estiverem prontos
-	var scene_path = "res://cenario.tscn"
+	var scene_path = "res://scenes/cenario.tscn"
 	var error = get_tree().change_scene_to_file(scene_path)
 	
 	if error != OK:

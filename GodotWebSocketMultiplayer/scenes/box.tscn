@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dl0ryd1trv5ru"]
 
-[ext_resource type="Script" uid="uid://bfy38t7wixsbb" path="res://box.gd" id="1_oq5cr"]
+[ext_resource type="Script" uid="uid://bfy38t7wixsbb" path="res://scenes/box.gd" id="1_oq5cr"]
 [ext_resource type="Texture2D" uid="uid://cd7j312861wa6" path="res://assets/caixa_vermelho_x.png" id="2_oq5cr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oq5cr"]
