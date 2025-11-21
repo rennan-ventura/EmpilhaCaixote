@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var is_holding := false
 var can_hold := false
-const NEW_ITEM := preload("res://caixa_vermelha_X.tscn")
+const NEW_ITEM := preload("res://Scenes/caixa_vermelha_X.tscn")
 
 var speed = 5000
 # Called when the node enters the scene tree for the first time.

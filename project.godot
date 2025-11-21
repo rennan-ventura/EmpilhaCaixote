@@ -11,26 +11,28 @@ config_version=5
 [application]
 
 config/name="EmpilhaCaixote"
-run/main_scene="uid://c43eeukqucn7u"
+run/main_scene="uid://soeuvp4phwpy"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Supabase="*res://addons/supabase/Supabase/supabase.gd"
-SupabaseClient="*res://SupabaseClient.gd"
+SupabaseClient="*res://scripts/SupabaseClient.gd"
+WebSocketClient="*res://addons/SimpleMultiplayer/websocket_client.gd"
+MultiplayerManager="*res://addons/SimpleMultiplayer/multiplayer_manager.tscn"
 
 [display]
 
-window/size/viewport_width=360
-window/size/viewport_height=180
+window/size/viewport_width=1200
+window/size/viewport_height=700
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/supabase/plugin.cfg")
+enabled=PackedStringArray("res://addons/SimpleMultiplayer/plugin.cfg", "res://addons/supabase/plugin.cfg")
 
 [input]
 
@@ -63,3 +65,4 @@ movea={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"

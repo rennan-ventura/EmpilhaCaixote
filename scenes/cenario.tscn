@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqd63okhyaay8"]
+
+[ext_resource type="Script" uid="uid://cowb2eqohjr8s" path="res://scripts/cenario.gd" id="1_2p5gn"]
+[ext_resource type="Texture2D" uid="uid://bgjxdtxagmkkt" path="res://assets/fundos/fundo.png" id="2_kfbu0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qijgh"]
+distance = -31.0
+
+[node name="cenario" type="Node2D"]
+script = ExtResource("1_2p5gn")
+
+[node name="Fundo" type="Sprite2D" parent="."]
+position = Vector2(600.61835, 351.96844)
+scale = Vector2(-1.1730827, 1.2255849)
+texture = ExtResource("2_kfbu0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(600, 665)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+physics_interpolation_mode = 2
+shape = SubResource("WorldBoundaryShape2D_qijgh")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(600, 350)
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+position = Vector2(600, 665)
+
+[node name="EliminarLinha" type="Button" parent="."]
+offset_left = 90.0
+offset_top = 609.0
+offset_right = 196.0
+offset_bottom = 640.0
+text = "Limpar linha
+"
+
+[node name="Eliminar caixa" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Reduzir tempo" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Bloquear coluna" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="pressed" from="EliminarLinha" to="." method="_on_eliminar_linha_pressed"]
+[connection signal="pressed" from="Eliminar caixa" to="." method="_on_eliminar_caixa_pressed"]
+[connection signal="pressed" from="Reduzir tempo" to="." method="_on_reduzir_tempo_pressed"]
+[connection signal="pressed" from="Bloquear coluna" to="." method="_on_bloquear_coluna_pressed"]

@@ -1,0 +1,385 @@
+[gd_scene load_steps=19 format=3 uid="uid://cd1d60vim6uue"]
+
+[ext_resource type="Script" uid="uid://u76e4xng22yp" path="res://scripts/loja_diamantes.gd" id="1_3s7gu"]
+[ext_resource type="Texture2D" uid="uid://c5j6aw358fkok" path="res://assets/fundos/menu.png" id="1_jt67y"]
+[ext_resource type="Texture2D" uid="uid://cjprvtkymfghf" path="res://assets/retanguloTras.png" id="2_s1i4n"]
+[ext_resource type="Texture2D" uid="uid://ddcukdvh3hq4j" path="res://assets/retanguloFrente.png" id="3_hjgqp"]
+[ext_resource type="Texture2D" uid="uid://81p08oflwakn" path="res://assets/LOJA.png" id="4_pl8hc"]
+[ext_resource type="Texture2D" uid="uid://ci4jx078bx5bi" path="res://assets/aba.png" id="5_3s7gu"]
+[ext_resource type="Texture2D" uid="uid://bvpj08c8k5vkt" path="res://assets/moedaIcon.png" id="5_23tpf"]
+[ext_resource type="Texture2D" uid="uid://l62j4hakeqsv" path="res://assets/aba_press.png" id="6_sk4rm"]
+[ext_resource type="Texture2D" uid="uid://c4c57xk3uydkf" path="res://assets/diamante1.png" id="9_23tpf"]
+[ext_resource type="Texture2D" uid="uid://cj61s1u31p56a" path="res://assets/retanguloMeio.png" id="9_jwd73"]
+[ext_resource type="Texture2D" uid="uid://mycyh2vv7fng" path="res://assets/retanguloItem.png" id="10_8bkx7"]
+[ext_resource type="Texture2D" uid="uid://dydscb8c85gj0" path="res://assets/diamante2.png" id="10_yp5oe"]
+[ext_resource type="Texture2D" uid="uid://ckvajpknlsg3x" path="res://assets/diamante3.png" id="11_jt67y"]
+[ext_resource type="Texture2D" uid="uid://bdemxnk62lx5k" path="res://assets/diamanteIcon.png" id="11_kqhup"]
+[ext_resource type="Texture2D" uid="uid://bmw4pkjg148hm" path="res://assets/diamante4.png" id="12_3s7gu"]
+[ext_resource type="Theme" uid="uid://shsbaaluk1ft" path="res://botaoazulcerto.tres" id="13_jt67y"]
+[ext_resource type="Texture2D" uid="uid://cx1dwb4b0ug24" path="res://assets/sair.png" id="14_gse5o"]
+[ext_resource type="Texture2D" uid="uid://hle4jmqyv4bh" path="res://assets/voltar.png" id="15_f2i6t"]
+
+[node name="loja-diamantes" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3s7gu")
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 180.0
+texture = ExtResource("1_jt67y")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_s1i4n")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_hjgqp")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 70
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("5_23tpf")
+
+[node name="LabelMoedas" type="Label" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_kqhup")
+
+[node name="LabelDiamantes" type="Label" parent="MarginContainer/MarginContainer/MarginContainer2/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_pl8hc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="aba_poderes" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_poderes"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 0.5
+offset_right = 56.0
+offset_bottom = 13.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Poderes"
+horizontal_alignment = 1
+
+[node name="aba_cenarios" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_cenarios"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Cenários"
+horizontal_alignment = 1
+
+[node name="aba_moedas" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_moedas"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "Moedas"
+horizontal_alignment = 1
+
+[node name="aba_diamantes" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_sk4rm")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_diamantes"]
+layout_mode = 0
+offset_right = 55.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0.30588236, 0.42352942, 0.6784314, 1)
+theme_override_font_sizes/font_size = 9
+text = "Diamantes"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("9_jwd73")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect"]
+layout_mode = 0
+offset_top = 0.5
+offset_right = 217.0
+offset_bottom = 80.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="item1" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_8bkx7")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_23tpf")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "10 Diamantes"
+
+[node name="diama1_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$5,00"
+
+[node name="item2" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_8bkx7")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_yp5oe")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "30 Diamantes"
+
+[node name="diama2_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$10,00"
+
+[node name="item3" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_8bkx7")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_jt67y")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "100 Diamantes"
+
+[node name="diama3_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$30,00
+"
+
+[node name="item4" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("10_8bkx7")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -3.5
+offset_right = 45.0
+offset_bottom = 67.5
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("12_3s7gu")
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "300 Diamantes"
+
+[node name="diama4_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 2
+theme_override_font_sizes/font_size = 6
+text = "R$70,00"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 58
+
+[node name="Comecar_btn" type="Button" parent="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("13_jt67y")
+theme_override_font_sizes/font_size = 9
+text = "Começar
+"
+
+[node name="sair_btn" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+toggle_mode = true
+texture_normal = ExtResource("14_gse5o")
+
+[node name="voltar_btn" type="TextureButton" parent="MarginContainer/MarginContainer/MarginContainer"]
+layout_mode = 2
+texture_normal = ExtResource("15_f2i6t")
+
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_poderes" to="." method="_on_aba_poderes_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_cenarios" to="." method="_on_aba_cenarios_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/aba_moedas" to="." method="_on_aba_moedas_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item1/MarginContainer/VBoxContainer/diama1_btn" to="." method="_on_diama_1_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item2/MarginContainer/VBoxContainer/diama2_btn" to="." method="_on_diama_2_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item3/MarginContainer/VBoxContainer/diama3_btn" to="." method="_on_diama_3_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/TextureRect/MarginContainer/HBoxContainer/item4/MarginContainer/VBoxContainer/diama4_btn" to="." method="_on_diama_4_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Comecar_btn" to="." method="_on_comecar_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/sair_btn" to="." method="_on_sair_btn_pressed"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/MarginContainer/voltar_btn" to="." method="_on_voltar_btn_pressed"]
