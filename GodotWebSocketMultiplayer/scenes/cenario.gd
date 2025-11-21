@@ -121,6 +121,9 @@ func update_board(new_board: Array) -> void:
 	"""
 	print("✓ Atualizando board do servidor...")
 	
+	for b in boxes:
+		if b:
+			b.queue_free()
 	# Itera sobre cada célula da matriz
 	for row in range(ROWS):
 		for col in range(COLS):
@@ -152,6 +155,7 @@ func _on_box_drop(data: Dictionary) -> void:
 
 func _on_update_board(data: Dictionary) -> void:
 	"""NOVO: Chamado quando servidor envia atualização completa do board (ex: após poder)"""
+	print("ta chegando aqui")
 	var new_board = data.get("newBoard", [])
 	if new_board.size() > 0:
 		update_board(new_board)
@@ -161,7 +165,7 @@ func _spawn_box(data: int, color: String) -> void:
 	"""Spawn de uma caixa caindo (movimento visual)"""
 	var box_crate := box.instantiate()
 	box_crate.position.x = data + left_offset
-	box_crate.position.y = -200
+	box_crate.position.y = 0
 
 	match color:
 		"red":
@@ -209,9 +213,8 @@ func _unhandled_input(event):
 # BOTÕES / PODERES
 # ========================================
 func _on_eliminar_linha_pressed() -> void:
-	server_handle.send_message("clear_bottom_line", {})
-
-
+	if can_drop:
+		server_handle.send_message("clear_bottom_line", {})
 
 
 # ========================================

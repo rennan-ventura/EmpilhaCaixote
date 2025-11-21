@@ -9,7 +9,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	snap()
+
 	fall()
 
 
@@ -20,15 +20,12 @@ func snap():
 func fall():
 	if not falling:
 		return
-
-	var size = sprite2d.texture.get_height()
-	var vp = get_viewport_rect().size.y / 2
-
-	if position.y < vp - size:
-		position.y += 5
-		overlap()
-	else:
+	if(position.y > 640):
 		falling = false
+		position.y = 650
+		return
+	position.y += 5
+	overlap()
 
 
 func overlap():
