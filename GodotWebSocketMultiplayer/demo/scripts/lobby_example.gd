@@ -7,7 +7,7 @@ extends Control
 @onready var status_label = $VBoxContainer/StatusLabel
 
 # URL padrão do servidor (pode trocar para wss:// quando usar no Render)
-const DEFAULT_SERVER_URL = "ws://localhost:9090"
+const DEFAULT_SERVER_URL = "wss://server-empilhacaixote.onrender.com"
 
 func _ready() -> void:
 	# Conecta os botões da interface
